@@ -1,0 +1,26 @@
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name adminer.nmota-bu.42.fr;
+
+    ssl_certificate /etc/ssl/certs/nginx.crt;
+    ssl_certificate_key /etc/ssl/private/nginx.key;
+    ssl_protocols TLSv1.3;
+
+    location / {
+        proxy_pass https://adminer:7777;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location /index.php {
+        rewrite ^/(.*)$ /$1 break;
+        proxy_pass https://adminer:7777/index.php;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}

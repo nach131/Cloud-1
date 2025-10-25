@@ -1,0 +1,127 @@
+version: "3.7"
+
+services:
+  mariadb:
+    command: /bin/sh -c "apk update && apk add mariadb mariadb-client && mkdir -p /var/lib/mysql && chown -R mysql:mysql /var/lib/mysql && mysql_install_db --user=mysql --ldata=/var/lib/mysql && mysqld_safe"
+    build:
+      context: ./requirements/mariadb/
+      dockerfile: Dockerfile
+    container_name: db
+    restart: always
+    env_file:
+     - .env
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - tokemo
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-u",
+          "root",
+          "-p${MYSQL_ROOT_PASSWORD}"
+        ]
+
+  nginx:
+    build:
+      context: ./requirements/nginx
+      dockerfile: Dockerfile
+    container_name: web
+    restart: always
+    ports:
+      - "443:443"
+    volumes:
+      - nasa:/var/www/nasa
+      - wp_files:/var/www/wp
+    depends_on:
+      - adminer
+    networks:
+      - tokemo
+
+  wordpress:
+      container_name: wp
+      build: ./requirements/wordpress
+      depends_on:
+      - mariadb
+      volumes:
+      - wp_files:/var/www/wp
+      restart: always
+      ports:
+      - "9000:9000"
+      networks:
+      - tokemo
+      env_file:
+      - .env
+
+  phpmyadmin:
+    container_name: myadm
+    build: ./requirements/bonus/phpmyadmin
+    ports:
+      - "8080:80"
+    networks:
+      - tokemo
+    env_file:
+      - .env
+  
+  adminer:
+    container_name: adminer
+    build: ./requirements/bonus/adminer
+    restart: always
+    ports:
+      - 7777:8080
+    networks:
+      - tokemo
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      ADMINER_DEFAULT_SERVER: ${PMA_HOST}
+      ADMINER_HOST: ${PMA_HOST}
+
+  vsftpd:
+    container_name: ftp
+    build: ./requirements/bonus/ftp
+    ports:
+      - "20:20"
+      - "21:21"
+      - "21100-21110:21100-21110"
+    environment:
+      FTP_USER: ${WORDPRESS_DB_USER}
+      FTP_PASS: ${WORDPRESS_DB_PASSWORD}
+      PASV_ADDRESS: "127.0.0.1"
+      PASV_MIN_PORT: "21100"
+      PASV_MAX_PORT: "21110"
+    volumes:
+      - wp_files:/home/vsftpd/${WORDPRESS_DB_USER}
+    restart: always
+
+volumes:
+    dbdata:
+        driver: local
+        driver_opts:
+            type: none
+            device: ${TOMA}/data/mysql
+            o: bind
+
+    wp_files:
+        driver: local
+        driver_opts:
+            type: none
+            device: ${TOMA}/data/wordpress
+            o: bind
+
+    nasa:
+      driver: local
+      driver_opts:
+        type: none
+        device: ${TOMA}/data/nasa
+        o: bind
+
+networks:
+  tokemo:
+    driver: bridge
+
+
