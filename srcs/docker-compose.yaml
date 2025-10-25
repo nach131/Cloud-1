@@ -1,127 +1,151 @@
-version: "3.7"
+x-web_base:: &web_base
+    image: web_base:1.1.0
+    build:
+      context: ./requirements/web    # image: nginx:latest
+    restart: unless-stopped
+    expose:
+      - "80"
+    depends_on:
+      - proxy
+      - letsencrypt
+    networks:
+      - cloud
 
 services:
+
   mariadb:
-    command: /bin/sh -c "apk update && apk add mariadb mariadb-client && mkdir -p /var/lib/mysql && chown -R mysql:mysql /var/lib/mysql && mysql_install_db --user=mysql --ldata=/var/lib/mysql && mysqld_safe"
-    build:
-      context: ./requirements/mariadb/
-      dockerfile: Dockerfile
-    container_name: db
+    image: mariadb:10.11
+    container_name: ${PMA_HOST}
     restart: always
-    env_file:
-     - .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${WORDPRESS_DB_NAME}
+      - MYSQL_USER=${WORDPRESS_DB_USER}
+      - MYSQL_PASSWORD=${WORDPRESS_DB_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
       - dbdata:/var/lib/mysql
     networks:
-      - tokemo
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "mysqladmin",
-          "ping",
-          "-u",
-          "root",
-          "-p${MYSQL_ROOT_PASSWORD}"
-        ]
+      - cloud
 
-  nginx:
-    build:
-      context: ./requirements/nginx
-      dockerfile: Dockerfile
-    container_name: web
+  proxy:
+    container_name: proxy
+    image: jwilder/nginx-proxy
     restart: always
     ports:
+      - "80:80"
       - "443:443"
     volumes:
-      - nasa:/var/www/nasa
-      - wp_files:/var/www/wp
-    depends_on:
-      - adminer
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      # - ./proxy/vhostd:/etc/nginx/vhost.d
+      - certs-data:/etc/nginx/certs:ro
+      - html:/usr/share/nginx/html
+      - acme:/etc/acme.sh
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
     networks:
-      - tokemo
+     - cloud
+
+  letsencrypt:
+    container_name: letsencrypt
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: unless-stopped
+    environment:
+      - NGINX_PROXY_CONTAINER=proxy
+      - ACME_CA_URI=https://acme-staging-v02.api.letsencrypt.org/directory # ⚠️ para las pruebas
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - certs-data:/etc/nginx/certs:rw
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - acme:/etc/acme.sh
+    networks:
+      - cloud
 
   wordpress:
-      container_name: wp
-      build: ./requirements/wordpress
-      depends_on:
-      - mariadb
-      volumes:
-      - wp_files:/var/www/wp
-      restart: always
-      ports:
-      - "9000:9000"
-      networks:
-      - tokemo
-      env_file:
-      - .env
-
-  phpmyadmin:
-    container_name: myadm
-    build: ./requirements/bonus/phpmyadmin
-    ports:
-      - "8080:80"
+    image: wordpress:6.8.3-php8.3-apache
+    container_name: wordpress
+    depends_on:
+      - ${PMA_HOST}
+    environment:
+      - WORDPRESS_DB_HOST=${PMA_HOST}
+      - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
+      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+      - VIRTUAL_HOST=${DOMAIN},www.${DOMAIN}
+      - LETSENCRYPT_HOST=${DOMAIN},www.${DOMAIN}
+      - DOMAIN=${DOMAIN}
+      - LETSENCRYPT_EMAIL=nacho@enunpimpam.com
+    expose:
+      - "80"
+    volumes:
+      - wp_files:/var/www/html
     networks:
-      - tokemo
-    env_file:
-      - .env
-  
+      - cloud
+
+  web-nasa:
+    <<: *web_base
+    container_name: web-nasa
+    environment:
+      - VIRTUAL_HOST=${NASA}.${DOMAIN},www.${NASA}.${DOMAIN}
+      - LETSENCRYPT_HOST=${NASA}.${DOMAIN},www.${NASA}.${DOMAIN}
+      - DOMAIN=${NASA}
+      - LETSENCRYPT_EMAIL=nacho@enunpimpam.com
+    volumes:
+      - www-nasa:/usr/share/nginx/html:ro
+      # - ./data/logs/nginx:/var/log/nginx
+
   adminer:
     container_name: adminer
-    build: ./requirements/bonus/adminer
+    build: ./requirements/adminer
     restart: always
     ports:
-      - 7777:8080
+      - "8080"
     networks:
-      - tokemo
+      - cloud
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      ADMINER_DEFAULT_SERVER: ${PMA_HOST}
-      ADMINER_HOST: ${PMA_HOST}
-
-  vsftpd:
-    container_name: ftp
-    build: ./requirements/bonus/ftp
-    ports:
-      - "20:20"
-      - "21:21"
-      - "21100-21110:21100-21110"
-    environment:
-      FTP_USER: ${WORDPRESS_DB_USER}
-      FTP_PASS: ${WORDPRESS_DB_PASSWORD}
-      PASV_ADDRESS: "127.0.0.1"
-      PASV_MIN_PORT: "21100"
-      PASV_MAX_PORT: "21110"
-    volumes:
-      - wp_files:/home/vsftpd/${WORDPRESS_DB_USER}
-    restart: always
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - ADMINER_DEFAULT_SERVER=${PMA_HOST}
+      - ADMINER_HOST=${PMA_HOST}
+      - VIRTUAL_HOST=${ADMINER}.${DOMAIN},www.${ADMINER}.${DOMAIN}
+      - LETSENCRYPT_HOST=${ADMINER}.${DOMAIN},www.${ADMINER}.${DOMAIN}
+      - LETSENCRYPT_EMAIL=nacho@enunpimpam.com
 
 volumes:
-    dbdata:
-        driver: local
-        driver_opts:
-            type: none
-            device: ${TOMA}/data/mysql
-            o: bind
+  vhostd:
+  acme:
+  html:
+  certs-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${TOMA}/data/certs
+      o: bind
 
-    wp_files:
-        driver: local
-        driver_opts:
-            type: none
-            device: ${TOMA}/data/wordpress
-            o: bind
-
-    nasa:
+  dbdata:
       driver: local
       driver_opts:
+          type: none
+          device: ${TOMA}/data/mysql
+          o: bind
+
+  wp_files:
+    driver: local
+    driver_opts:
         type: none
-        device: ${TOMA}/data/nasa
+        device: ${TOMA}/data/wordpress
         o: bind
 
+  www-nasa:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${TOMA}/data/nasa
+      o: bind
+
 networks:
-  tokemo:
+  cloud:
     driver: bridge
 
 

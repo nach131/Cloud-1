@@ -1,0 +1,6 @@
+.env
+.DS_Store
+data/mysql
+data/nasa
+data/wordpress
+data/certs
