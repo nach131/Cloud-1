@@ -38,14 +38,25 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      # - ./proxy/vhostd:/etc/nginx/vhost.d
       - certs-data:/etc/nginx/certs:ro
       - html:/usr/share/nginx/html
       - acme:/etc/acme.sh
+      # - ./data/logs/proxy:/var/log/nginx
     labels:
       - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
     networks:
      - cloud
+
+  # logrotate:
+  #   image: logrotate:1.0.0
+  #   container_name: logrotate
+  #   build:
+  #     context: ./requirements/logrotate
+  #   volumes:
+  #     - ./data/logs/proxy:/var/log/nginx
+  #   restart: always
+  #   networks:
+  #     - cloud
 
   letsencrypt:
     container_name: letsencrypt
@@ -96,21 +107,40 @@ services:
       - www-nasa:/usr/share/nginx/html:ro
       # - ./data/logs/nginx:/var/log/nginx
 
-  adminer:
-    container_name: adminer
-    build: ./requirements/adminer
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin:5.2.3
     restart: always
-    ports:
-      - "8080"
+    depends_on:
+      - ${PMA_HOST}
+    environment:
+      - PMA_HOST=${PMA_HOST}
+      # - PMA_USER=${WORDPRESS_DB_USER}
+      # - PMA_PASSWORD=${WORDPRESS_DB_PASSWORD}
+      - UPLOAD_LIMIT=512M
+      - VIRTUAL_HOST=${PHPMYADMIN}.${DOMAIN},www.${PHPMYADMIN}.${DOMAIN}
+      - LETSENCRYPT_HOST=${PHPMYADMIN}.${DOMAIN},www.${PHPMYADMIN}.${DOMAIN}
+      - LETSENCRYPT_EMAIL=nacho@enunpimpam.com
+    expose:
+      - "80"
     networks:
       - cloud
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - ADMINER_DEFAULT_SERVER=${PMA_HOST}
-      - ADMINER_HOST=${PMA_HOST}
-      - VIRTUAL_HOST=${ADMINER}.${DOMAIN},www.${ADMINER}.${DOMAIN}
-      - LETSENCRYPT_HOST=${ADMINER}.${DOMAIN},www.${ADMINER}.${DOMAIN}
-      - LETSENCRYPT_EMAIL=nacho@enunpimpam.com
+
+  # adminer:
+  #   container_name: adminer
+  #   build: ./requirements/adminer
+  #   restart: always
+  #   ports:
+  #     - "8080"
+  #   networks:
+  #     - cloud
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+  #     - ADMINER_DEFAULT_SERVER=${PMA_HOST}
+  #     - ADMINER_HOST=${PMA_HOST}
+  #     - VIRTUAL_HOST=${ADMINER}.${DOMAIN},www.${ADMINER}.${DOMAIN}
+  #     - LETSENCRYPT_HOST=${ADMINER}.${DOMAIN},www.${ADMINER}.${DOMAIN}
+  #     - LETSENCRYPT_EMAIL=nacho@enunpimpam.com
 
 volumes:
   vhostd:
@@ -120,28 +150,28 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ${PATH}/data/certs
+      device: ${TOMA}/data/certs
       o: bind
 
   dbdata:
       driver: local
       driver_opts:
           type: none
-          device: ${PATH}/data/mysql
+          device: ${TOMA}/data/mysql
           o: bind
 
   wp_files:
     driver: local
     driver_opts:
         type: none
-        device: ${PATH}/data/wordpress
+        device: ${TOMA}/data/wordpress
         o: bind
 
   www-nasa:
     driver: local
     driver_opts:
       type: none
-      device: ${PATH}/data/nasa
+      device: ${TOMA}/data/nasa
       o: bind
 
 networks:
@@ -149,3 +179,6 @@ networks:
     driver: bridge
 
 
+# docker inspect phpmyadmin:latest | grep -i version
+
+# docker exec proxy bash -c "cat /etc/nginx/conf.d/default.conf | grep phpmyadmin"

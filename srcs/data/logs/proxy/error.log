@@ -1,0 +1,794 @@
+2025/10/25 15:03:34 [notice] 19#19: using the "epoll" event method
+2025/10/25 15:03:34 [notice] 19#19: nginx/1.29.2
+2025/10/25 15:03:34 [notice] 19#19: built by gcc 14.2.0 (Debian 14.2.0-19) 
+2025/10/25 15:03:34 [notice] 19#19: OS: Linux 6.8.0-60-generic
+2025/10/25 15:03:34 [notice] 19#19: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2025/10/25 15:03:34 [notice] 19#19: start worker processes
+2025/10/25 15:03:34 [notice] 19#19: start worker process 26
+2025/10/25 15:03:34 [notice] 19#19: start worker process 27
+2025/10/25 15:03:34 [notice] 25#25: signal process started
+2025/10/25 15:03:34 [notice] 19#19: signal 1 (SIGHUP) received from 25, reconfiguring
+2025/10/25 15:03:34 [notice] 19#19: reconfiguring
+2025/10/25 15:03:34 [notice] 19#19: using the "epoll" event method
+2025/10/25 15:03:34 [notice] 19#19: start worker processes
+2025/10/25 15:03:34 [notice] 19#19: start worker process 31
+2025/10/25 15:03:34 [notice] 19#19: start worker process 32
+2025/10/25 15:03:34 [notice] 26#26: gracefully shutting down
+2025/10/25 15:03:34 [notice] 26#26: exiting
+2025/10/25 15:03:34 [notice] 26#26: exit
+2025/10/25 15:03:34 [notice] 27#27: gracefully shutting down
+2025/10/25 15:03:34 [notice] 27#27: exiting
+2025/10/25 15:03:34 [notice] 27#27: exit
+2025/10/25 15:03:34 [notice] 19#19: signal 17 (SIGCHLD) received from 27
+2025/10/25 15:03:34 [notice] 19#19: worker process 27 exited with code 0
+2025/10/25 15:03:34 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:03:34 [notice] 19#19: signal 17 (SIGCHLD) received from 26
+2025/10/25 15:03:34 [notice] 19#19: worker process 26 exited with code 0
+2025/10/25 15:03:34 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:03:35 [notice] 34#34: signal process started
+2025/10/25 15:03:35 [notice] 19#19: signal 1 (SIGHUP) received from 34, reconfiguring
+2025/10/25 15:03:35 [notice] 19#19: reconfiguring
+2025/10/25 15:03:35 [notice] 19#19: using the "epoll" event method
+2025/10/25 15:03:35 [notice] 19#19: start worker processes
+2025/10/25 15:03:35 [notice] 19#19: start worker process 35
+2025/10/25 15:03:35 [notice] 19#19: start worker process 36
+2025/10/25 15:03:35 [notice] 32#32: gracefully shutting down
+2025/10/25 15:03:35 [notice] 32#32: exiting
+2025/10/25 15:03:35 [notice] 32#32: exit
+2025/10/25 15:03:35 [notice] 31#31: gracefully shutting down
+2025/10/25 15:03:35 [notice] 31#31: exiting
+2025/10/25 15:03:35 [notice] 31#31: exit
+2025/10/25 15:03:35 [notice] 19#19: signal 17 (SIGCHLD) received from 32
+2025/10/25 15:03:35 [notice] 19#19: worker process 32 exited with code 0
+2025/10/25 15:03:35 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:03:35 [notice] 19#19: signal 17 (SIGCHLD) received from 31
+2025/10/25 15:03:35 [notice] 19#19: worker process 31 exited with code 0
+2025/10/25 15:03:35 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:03:35 [notice] 38#38: signal process started
+2025/10/25 15:03:35 [notice] 19#19: signal 1 (SIGHUP) received from 38, reconfiguring
+2025/10/25 15:03:35 [notice] 19#19: reconfiguring
+2025/10/25 15:03:35 [notice] 19#19: using the "epoll" event method
+2025/10/25 15:03:35 [notice] 19#19: start worker processes
+2025/10/25 15:03:35 [notice] 19#19: start worker process 45
+2025/10/25 15:03:35 [notice] 19#19: start worker process 46
+2025/10/25 15:03:35 [notice] 36#36: gracefully shutting down
+2025/10/25 15:03:35 [notice] 35#35: gracefully shutting down
+2025/10/25 15:03:35 [notice] 36#36: exiting
+2025/10/25 15:03:35 [notice] 35#35: exiting
+2025/10/25 15:03:35 [notice] 35#35: exit
+2025/10/25 15:03:35 [notice] 36#36: exit
+2025/10/25 15:03:35 [notice] 19#19: signal 17 (SIGCHLD) received from 35
+2025/10/25 15:03:35 [notice] 19#19: worker process 35 exited with code 0
+2025/10/25 15:03:35 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:03:35 [notice] 19#19: signal 17 (SIGCHLD) received from 36
+2025/10/25 15:03:35 [notice] 19#19: worker process 36 exited with code 0
+2025/10/25 15:03:35 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:03:35 [notice] 51#51: signal process started
+2025/10/25 15:03:35 [notice] 19#19: signal 1 (SIGHUP) received from 51, reconfiguring
+2025/10/25 15:03:35 [notice] 19#19: reconfiguring
+2025/10/25 15:03:35 [notice] 19#19: using the "epoll" event method
+2025/10/25 15:03:35 [notice] 19#19: start worker processes
+2025/10/25 15:03:35 [notice] 19#19: start worker process 52
+2025/10/25 15:03:35 [notice] 19#19: start worker process 53
+2025/10/25 15:03:35 [notice] 46#46: gracefully shutting down
+2025/10/25 15:03:35 [notice] 46#46: exiting
+2025/10/25 15:03:35 [notice] 45#45: gracefully shutting down
+2025/10/25 15:03:35 [notice] 45#45: exiting
+2025/10/25 15:03:35 [notice] 45#45: exit
+2025/10/25 15:03:35 [notice] 46#46: exit
+2025/10/25 15:03:35 [notice] 19#19: signal 17 (SIGCHLD) received from 45
+2025/10/25 15:03:35 [notice] 19#19: worker process 45 exited with code 0
+2025/10/25 15:03:35 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:03:35 [notice] 19#19: signal 17 (SIGCHLD) received from 46
+2025/10/25 15:03:35 [notice] 19#19: worker process 46 exited with code 0
+2025/10/25 15:03:35 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:07:58 [notice] 55#55: signal process started
+2025/10/25 15:07:58 [notice] 19#19: signal 1 (SIGHUP) received from 55, reconfiguring
+2025/10/25 15:07:58 [notice] 19#19: reconfiguring
+2025/10/25 15:07:58 [notice] 19#19: using the "epoll" event method
+2025/10/25 15:07:58 [notice] 19#19: start worker processes
+2025/10/25 15:07:58 [notice] 19#19: start worker process 56
+2025/10/25 15:07:58 [notice] 19#19: start worker process 57
+2025/10/25 15:07:58 [notice] 59#59: signal process started
+2025/10/25 15:07:58 [notice] 19#19: signal 1 (SIGHUP) received from 59, reconfiguring
+2025/10/25 15:07:58 [notice] 19#19: reconfiguring
+2025/10/25 15:07:58 [notice] 52#52: gracefully shutting down
+2025/10/25 15:07:58 [notice] 52#52: exiting
+2025/10/25 15:07:58 [notice] 52#52: exit
+2025/10/25 15:07:58 [notice] 53#53: gracefully shutting down
+2025/10/25 15:07:58 [notice] 53#53: exiting
+2025/10/25 15:07:58 [notice] 53#53: exit
+2025/10/25 15:07:58 [notice] 19#19: using the "epoll" event method
+2025/10/25 15:07:58 [notice] 19#19: start worker processes
+2025/10/25 15:07:58 [notice] 19#19: start worker process 60
+2025/10/25 15:07:58 [notice] 19#19: start worker process 61
+2025/10/25 15:07:58 [notice] 56#56: gracefully shutting down
+2025/10/25 15:07:58 [notice] 56#56: exiting
+2025/10/25 15:07:58 [notice] 56#56: exit
+2025/10/25 15:07:58 [notice] 57#57: gracefully shutting down
+2025/10/25 15:07:58 [notice] 57#57: exiting
+2025/10/25 15:07:58 [notice] 57#57: exit
+2025/10/25 15:07:58 [notice] 19#19: signal 17 (SIGCHLD) received from 53
+2025/10/25 15:07:58 [notice] 19#19: worker process 52 exited with code 0
+2025/10/25 15:07:58 [notice] 19#19: worker process 53 exited with code 0
+2025/10/25 15:07:58 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:07:58 [notice] 19#19: signal 17 (SIGCHLD) received from 56
+2025/10/25 15:07:58 [notice] 19#19: worker process 56 exited with code 0
+2025/10/25 15:07:58 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:07:58 [notice] 19#19: signal 17 (SIGCHLD) received from 57
+2025/10/25 15:07:58 [notice] 19#19: worker process 57 exited with code 0
+2025/10/25 15:07:58 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:07:59 [notice] 63#63: signal process started
+2025/10/25 15:07:59 [notice] 19#19: signal 1 (SIGHUP) received from 63, reconfiguring
+2025/10/25 15:07:59 [notice] 19#19: reconfiguring
+2025/10/25 15:07:59 [notice] 19#19: using the "epoll" event method
+2025/10/25 15:07:59 [notice] 19#19: start worker processes
+2025/10/25 15:07:59 [notice] 19#19: start worker process 64
+2025/10/25 15:07:59 [notice] 19#19: start worker process 65
+2025/10/25 15:07:59 [notice] 68#68: signal process started
+2025/10/25 15:07:59 [notice] 60#60: gracefully shutting down
+2025/10/25 15:07:59 [notice] 60#60: exiting
+2025/10/25 15:07:59 [notice] 60#60: exit
+2025/10/25 15:07:59 [notice] 61#61: gracefully shutting down
+2025/10/25 15:07:59 [notice] 61#61: exiting
+2025/10/25 15:07:59 [notice] 61#61: exit
+2025/10/25 15:07:59 [notice] 19#19: signal 1 (SIGHUP) received from 68, reconfiguring
+2025/10/25 15:07:59 [notice] 19#19: reconfiguring
+2025/10/25 15:07:59 [notice] 19#19: using the "epoll" event method
+2025/10/25 15:07:59 [notice] 19#19: start worker processes
+2025/10/25 15:07:59 [notice] 19#19: start worker process 69
+2025/10/25 15:07:59 [notice] 19#19: start worker process 70
+2025/10/25 15:07:59 [notice] 64#64: gracefully shutting down
+2025/10/25 15:07:59 [notice] 64#64: exiting
+2025/10/25 15:07:59 [notice] 64#64: exit
+2025/10/25 15:07:59 [notice] 65#65: gracefully shutting down
+2025/10/25 15:07:59 [notice] 65#65: exiting
+2025/10/25 15:07:59 [notice] 65#65: exit
+2025/10/25 15:07:59 [notice] 19#19: signal 17 (SIGCHLD) received from 61
+2025/10/25 15:07:59 [notice] 19#19: worker process 60 exited with code 0
+2025/10/25 15:07:59 [notice] 19#19: worker process 61 exited with code 0
+2025/10/25 15:07:59 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:07:59 [notice] 19#19: signal 17 (SIGCHLD) received from 65
+2025/10/25 15:07:59 [notice] 19#19: worker process 65 exited with code 0
+2025/10/25 15:07:59 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:07:59 [notice] 19#19: signal 17 (SIGCHLD) received from 64
+2025/10/25 15:07:59 [notice] 19#19: worker process 64 exited with code 0
+2025/10/25 15:07:59 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:08:33 [notice] 18#18: using the "epoll" event method
+2025/10/25 15:08:33 [notice] 18#18: nginx/1.29.2
+2025/10/25 15:08:33 [notice] 18#18: built by gcc 14.2.0 (Debian 14.2.0-19) 
+2025/10/25 15:08:33 [notice] 18#18: OS: Linux 6.8.0-60-generic
+2025/10/25 15:08:33 [notice] 18#18: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2025/10/25 15:08:33 [notice] 18#18: start worker processes
+2025/10/25 15:08:33 [notice] 18#18: start worker process 22
+2025/10/25 15:08:33 [notice] 18#18: start worker process 23
+2025/10/25 15:08:33 [notice] 26#26: signal process started
+2025/10/25 15:08:33 [notice] 18#18: signal 1 (SIGHUP) received from 26, reconfiguring
+2025/10/25 15:08:33 [notice] 18#18: reconfiguring
+2025/10/25 15:08:33 [notice] 18#18: using the "epoll" event method
+2025/10/25 15:08:33 [notice] 18#18: start worker processes
+2025/10/25 15:08:33 [notice] 18#18: start worker process 30
+2025/10/25 15:08:33 [notice] 18#18: start worker process 31
+2025/10/25 15:08:34 [notice] 22#22: gracefully shutting down
+2025/10/25 15:08:34 [notice] 22#22: exiting
+2025/10/25 15:08:34 [notice] 22#22: exit
+2025/10/25 15:08:34 [notice] 23#23: gracefully shutting down
+2025/10/25 15:08:34 [notice] 23#23: exiting
+2025/10/25 15:08:34 [notice] 23#23: exit
+2025/10/25 15:08:34 [notice] 18#18: signal 17 (SIGCHLD) received from 23
+2025/10/25 15:08:34 [notice] 18#18: worker process 23 exited with code 0
+2025/10/25 15:08:34 [notice] 18#18: signal 29 (SIGIO) received
+2025/10/25 15:08:34 [notice] 18#18: signal 17 (SIGCHLD) received from 22
+2025/10/25 15:08:34 [notice] 18#18: worker process 22 exited with code 0
+2025/10/25 15:08:34 [notice] 18#18: signal 29 (SIGIO) received
+2025/10/25 15:08:34 [notice] 33#33: signal process started
+2025/10/25 15:08:34 [notice] 18#18: signal 1 (SIGHUP) received from 33, reconfiguring
+2025/10/25 15:08:34 [notice] 18#18: reconfiguring
+2025/10/25 15:08:34 [notice] 18#18: using the "epoll" event method
+2025/10/25 15:08:34 [notice] 18#18: start worker processes
+2025/10/25 15:08:34 [notice] 18#18: start worker process 34
+2025/10/25 15:08:34 [notice] 18#18: start worker process 35
+2025/10/25 15:08:34 [notice] 30#30: gracefully shutting down
+2025/10/25 15:08:34 [notice] 30#30: exiting
+2025/10/25 15:08:34 [notice] 30#30: exit
+2025/10/25 15:08:34 [notice] 31#31: gracefully shutting down
+2025/10/25 15:08:34 [notice] 31#31: exiting
+2025/10/25 15:08:34 [notice] 31#31: exit
+2025/10/25 15:08:34 [notice] 18#18: signal 17 (SIGCHLD) received from 31
+2025/10/25 15:08:34 [notice] 18#18: worker process 31 exited with code 0
+2025/10/25 15:08:34 [notice] 18#18: signal 29 (SIGIO) received
+2025/10/25 15:08:34 [notice] 18#18: signal 17 (SIGCHLD) received from 30
+2025/10/25 15:08:34 [notice] 18#18: worker process 30 exited with code 0
+2025/10/25 15:08:34 [notice] 18#18: signal 29 (SIGIO) received
+2025/10/25 15:08:34 [notice] 38#38: signal process started
+2025/10/25 15:08:34 [notice] 18#18: signal 1 (SIGHUP) received from 38, reconfiguring
+2025/10/25 15:08:34 [notice] 18#18: reconfiguring
+2025/10/25 15:08:34 [notice] 18#18: using the "epoll" event method
+2025/10/25 15:08:34 [notice] 18#18: start worker processes
+2025/10/25 15:08:34 [notice] 18#18: start worker process 39
+2025/10/25 15:08:34 [notice] 18#18: start worker process 40
+2025/10/25 15:08:34 [notice] 34#34: gracefully shutting down
+2025/10/25 15:08:34 [notice] 34#34: exiting
+2025/10/25 15:08:34 [notice] 34#34: exit
+2025/10/25 15:08:34 [notice] 35#35: gracefully shutting down
+2025/10/25 15:08:34 [notice] 35#35: exiting
+2025/10/25 15:08:34 [notice] 35#35: exit
+2025/10/25 15:08:34 [notice] 18#18: signal 17 (SIGCHLD) received from 34
+2025/10/25 15:08:34 [notice] 18#18: worker process 34 exited with code 0
+2025/10/25 15:08:34 [notice] 18#18: signal 29 (SIGIO) received
+2025/10/25 15:08:34 [notice] 18#18: signal 17 (SIGCHLD) received from 35
+2025/10/25 15:08:34 [notice] 18#18: worker process 35 exited with code 0
+2025/10/25 15:08:34 [notice] 18#18: signal 29 (SIGIO) received
+2025/10/25 15:08:34 [notice] 42#42: signal process started
+2025/10/25 15:08:34 [notice] 18#18: signal 1 (SIGHUP) received from 42, reconfiguring
+2025/10/25 15:08:34 [notice] 18#18: reconfiguring
+2025/10/25 15:08:34 [notice] 18#18: using the "epoll" event method
+2025/10/25 15:08:34 [notice] 18#18: start worker processes
+2025/10/25 15:08:34 [notice] 18#18: start worker process 43
+2025/10/25 15:08:34 [notice] 18#18: start worker process 44
+2025/10/25 15:08:34 [notice] 39#39: gracefully shutting down
+2025/10/25 15:08:34 [notice] 39#39: exiting
+2025/10/25 15:08:34 [notice] 40#40: gracefully shutting down
+2025/10/25 15:08:34 [notice] 40#40: exiting
+2025/10/25 15:08:34 [notice] 40#40: exit
+2025/10/25 15:08:34 [notice] 39#39: exit
+2025/10/25 15:08:34 [notice] 18#18: signal 17 (SIGCHLD) received from 39
+2025/10/25 15:08:34 [notice] 18#18: worker process 39 exited with code 0
+2025/10/25 15:08:34 [notice] 18#18: signal 29 (SIGIO) received
+2025/10/25 15:08:34 [notice] 18#18: signal 17 (SIGCHLD) received from 40
+2025/10/25 15:08:34 [notice] 18#18: worker process 40 exited with code 0
+2025/10/25 15:08:34 [notice] 18#18: signal 29 (SIGIO) received
+2025/10/25 15:08:34 [notice] 55#55: signal process started
+2025/10/25 15:08:34 [notice] 18#18: signal 1 (SIGHUP) received from 55, reconfiguring
+2025/10/25 15:08:34 [notice] 18#18: reconfiguring
+2025/10/25 15:08:34 [notice] 18#18: using the "epoll" event method
+2025/10/25 15:08:34 [notice] 18#18: start worker processes
+2025/10/25 15:08:34 [notice] 18#18: start worker process 56
+2025/10/25 15:08:34 [notice] 18#18: start worker process 57
+2025/10/25 15:08:35 [notice] 43#43: gracefully shutting down
+2025/10/25 15:08:35 [notice] 43#43: exiting
+2025/10/25 15:08:35 [notice] 44#44: gracefully shutting down
+2025/10/25 15:08:35 [notice] 44#44: exiting
+2025/10/25 15:08:35 [notice] 43#43: exit
+2025/10/25 15:08:35 [notice] 44#44: exit
+2025/10/25 15:08:35 [notice] 18#18: signal 17 (SIGCHLD) received from 44
+2025/10/25 15:08:35 [notice] 18#18: worker process 43 exited with code 0
+2025/10/25 15:08:35 [notice] 18#18: worker process 44 exited with code 0
+2025/10/25 15:08:35 [notice] 18#18: signal 29 (SIGIO) received
+2025/10/25 15:09:19 [notice] 68#68: signal process started
+2025/10/25 15:09:19 [notice] 18#18: signal 1 (SIGHUP) received from 68, reconfiguring
+2025/10/25 15:09:19 [notice] 18#18: reconfiguring
+2025/10/25 15:09:19 [notice] 18#18: using the "epoll" event method
+2025/10/25 15:09:19 [notice] 18#18: start worker processes
+2025/10/25 15:09:19 [notice] 18#18: start worker process 69
+2025/10/25 15:09:19 [notice] 18#18: start worker process 70
+2025/10/25 15:09:19 [notice] 57#57: gracefully shutting down
+2025/10/25 15:09:19 [notice] 57#57: exiting
+2025/10/25 15:09:19 [notice] 56#56: gracefully shutting down
+2025/10/25 15:09:19 [notice] 56#56: exiting
+2025/10/25 15:09:19 [notice] 57#57: exit
+2025/10/25 15:09:19 [notice] 56#56: exit
+2025/10/25 15:09:19 [notice] 18#18: signal 17 (SIGCHLD) received from 57
+2025/10/25 15:09:19 [notice] 18#18: worker process 57 exited with code 0
+2025/10/25 15:09:19 [notice] 18#18: signal 29 (SIGIO) received
+2025/10/25 15:09:19 [notice] 18#18: signal 17 (SIGCHLD) received from 56
+2025/10/25 15:09:19 [notice] 18#18: worker process 56 exited with code 0
+2025/10/25 15:09:19 [notice] 18#18: signal 29 (SIGIO) received
+2025/10/25 15:09:19 [notice] 72#72: signal process started
+2025/10/25 15:09:19 [notice] 18#18: signal 1 (SIGHUP) received from 72, reconfiguring
+2025/10/25 15:09:19 [notice] 18#18: reconfiguring
+2025/10/25 15:09:19 [notice] 18#18: using the "epoll" event method
+2025/10/25 15:09:19 [notice] 18#18: start worker processes
+2025/10/25 15:09:19 [notice] 18#18: start worker process 73
+2025/10/25 15:09:19 [notice] 18#18: start worker process 74
+2025/10/25 15:09:19 [notice] 69#69: gracefully shutting down
+2025/10/25 15:09:19 [notice] 69#69: exiting
+2025/10/25 15:09:19 [notice] 69#69: exit
+2025/10/25 15:09:19 [notice] 70#70: gracefully shutting down
+2025/10/25 15:09:19 [notice] 70#70: exiting
+2025/10/25 15:09:19 [notice] 70#70: exit
+2025/10/25 15:09:19 [notice] 18#18: signal 17 (SIGCHLD) received from 69
+2025/10/25 15:09:19 [notice] 18#18: worker process 69 exited with code 0
+2025/10/25 15:09:19 [notice] 18#18: signal 29 (SIGIO) received
+2025/10/25 15:09:19 [notice] 18#18: signal 17 (SIGCHLD) received from 70
+2025/10/25 15:09:19 [notice] 18#18: worker process 70 exited with code 0
+2025/10/25 15:09:19 [notice] 18#18: signal 29 (SIGIO) received
+2025/10/25 15:09:20 [notice] 76#76: signal process started
+2025/10/25 15:09:20 [notice] 18#18: signal 1 (SIGHUP) received from 76, reconfiguring
+2025/10/25 15:09:20 [notice] 18#18: reconfiguring
+2025/10/25 15:09:20 [notice] 18#18: using the "epoll" event method
+2025/10/25 15:09:20 [notice] 18#18: start worker processes
+2025/10/25 15:09:20 [notice] 18#18: start worker process 77
+2025/10/25 15:09:20 [notice] 18#18: start worker process 78
+2025/10/25 15:09:20 [notice] 74#74: gracefully shutting down
+2025/10/25 15:09:20 [notice] 74#74: exiting
+2025/10/25 15:09:20 [notice] 74#74: exit
+2025/10/25 15:09:20 [notice] 73#73: gracefully shutting down
+2025/10/25 15:09:20 [notice] 73#73: exiting
+2025/10/25 15:09:20 [notice] 73#73: exit
+2025/10/25 15:09:20 [notice] 18#18: signal 17 (SIGCHLD) received from 74
+2025/10/25 15:09:20 [notice] 18#18: worker process 74 exited with code 0
+2025/10/25 15:09:20 [notice] 18#18: signal 29 (SIGIO) received
+2025/10/25 15:09:20 [notice] 18#18: signal 17 (SIGCHLD) received from 73
+2025/10/25 15:09:20 [notice] 18#18: worker process 73 exited with code 0
+2025/10/25 15:09:20 [notice] 18#18: signal 29 (SIGIO) received
+2025/10/25 15:10:13 [notice] 20#20: using the "epoll" event method
+2025/10/25 15:10:13 [notice] 20#20: nginx/1.29.2
+2025/10/25 15:10:13 [notice] 20#20: built by gcc 14.2.0 (Debian 14.2.0-19) 
+2025/10/25 15:10:13 [notice] 20#20: OS: Linux 6.8.0-60-generic
+2025/10/25 15:10:13 [notice] 20#20: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2025/10/25 15:10:13 [notice] 20#20: start worker processes
+2025/10/25 15:10:13 [notice] 20#20: start worker process 24
+2025/10/25 15:10:13 [notice] 20#20: start worker process 25
+2025/10/25 15:10:13 [notice] 28#28: signal process started
+2025/10/25 15:10:13 [notice] 20#20: signal 1 (SIGHUP) received from 28, reconfiguring
+2025/10/25 15:10:13 [notice] 20#20: reconfiguring
+2025/10/25 15:10:13 [notice] 20#20: using the "epoll" event method
+2025/10/25 15:10:13 [notice] 20#20: start worker processes
+2025/10/25 15:10:13 [notice] 20#20: start worker process 32
+2025/10/25 15:10:13 [notice] 20#20: start worker process 33
+2025/10/25 15:10:13 [notice] 24#24: gracefully shutting down
+2025/10/25 15:10:13 [notice] 24#24: exiting
+2025/10/25 15:10:13 [notice] 24#24: exit
+2025/10/25 15:10:13 [notice] 25#25: gracefully shutting down
+2025/10/25 15:10:13 [notice] 25#25: exiting
+2025/10/25 15:10:13 [notice] 25#25: exit
+2025/10/25 15:10:13 [notice] 20#20: signal 17 (SIGCHLD) received from 24
+2025/10/25 15:10:13 [notice] 20#20: worker process 24 exited with code 0
+2025/10/25 15:10:13 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:10:13 [notice] 20#20: signal 17 (SIGCHLD) received from 25
+2025/10/25 15:10:13 [notice] 20#20: worker process 25 exited with code 0
+2025/10/25 15:10:13 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:10:13 [notice] 36#36: signal process started
+2025/10/25 15:10:13 [notice] 20#20: signal 1 (SIGHUP) received from 36, reconfiguring
+2025/10/25 15:10:13 [notice] 20#20: reconfiguring
+2025/10/25 15:10:13 [notice] 20#20: using the "epoll" event method
+2025/10/25 15:10:13 [notice] 20#20: start worker processes
+2025/10/25 15:10:13 [notice] 20#20: start worker process 37
+2025/10/25 15:10:13 [notice] 20#20: start worker process 38
+2025/10/25 15:10:14 [notice] 32#32: gracefully shutting down
+2025/10/25 15:10:14 [notice] 32#32: exiting
+2025/10/25 15:10:14 [notice] 33#33: gracefully shutting down
+2025/10/25 15:10:14 [notice] 33#33: exiting
+2025/10/25 15:10:14 [notice] 32#32: exit
+2025/10/25 15:10:14 [notice] 33#33: exit
+2025/10/25 15:10:14 [notice] 20#20: signal 17 (SIGCHLD) received from 32
+2025/10/25 15:10:14 [notice] 20#20: worker process 32 exited with code 0
+2025/10/25 15:10:14 [notice] 20#20: worker process 33 exited with code 0
+2025/10/25 15:10:14 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:10:14 [notice] 40#40: signal process started
+2025/10/25 15:10:14 [notice] 20#20: signal 1 (SIGHUP) received from 40, reconfiguring
+2025/10/25 15:10:14 [notice] 20#20: reconfiguring
+2025/10/25 15:10:14 [notice] 20#20: using the "epoll" event method
+2025/10/25 15:10:14 [notice] 20#20: start worker processes
+2025/10/25 15:10:14 [notice] 20#20: start worker process 41
+2025/10/25 15:10:14 [notice] 20#20: start worker process 42
+2025/10/25 15:10:14 [notice] 37#37: gracefully shutting down
+2025/10/25 15:10:14 [notice] 37#37: exiting
+2025/10/25 15:10:14 [notice] 38#38: gracefully shutting down
+2025/10/25 15:10:14 [notice] 38#38: exiting
+2025/10/25 15:10:14 [notice] 38#38: exit
+2025/10/25 15:10:14 [notice] 37#37: exit
+2025/10/25 15:10:14 [notice] 20#20: signal 17 (SIGCHLD) received from 37
+2025/10/25 15:10:14 [notice] 20#20: worker process 37 exited with code 0
+2025/10/25 15:10:14 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:10:14 [notice] 20#20: signal 17 (SIGCHLD) received from 38
+2025/10/25 15:10:14 [notice] 20#20: worker process 38 exited with code 0
+2025/10/25 15:10:14 [notice] 44#44: signal process started
+2025/10/25 15:10:14 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:10:14 [notice] 20#20: signal 1 (SIGHUP) received from 44, reconfiguring
+2025/10/25 15:10:14 [notice] 20#20: reconfiguring
+2025/10/25 15:10:14 [notice] 20#20: using the "epoll" event method
+2025/10/25 15:10:14 [notice] 20#20: start worker processes
+2025/10/25 15:10:14 [notice] 20#20: start worker process 45
+2025/10/25 15:10:14 [notice] 20#20: start worker process 46
+2025/10/25 15:10:14 [notice] 41#41: gracefully shutting down
+2025/10/25 15:10:14 [notice] 42#42: gracefully shutting down
+2025/10/25 15:10:14 [notice] 42#42: exiting
+2025/10/25 15:10:14 [notice] 41#41: exiting
+2025/10/25 15:10:14 [notice] 42#42: exit
+2025/10/25 15:10:14 [notice] 41#41: exit
+2025/10/25 15:10:14 [notice] 20#20: signal 17 (SIGCHLD) received from 42
+2025/10/25 15:10:14 [notice] 20#20: worker process 42 exited with code 0
+2025/10/25 15:10:14 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:10:14 [notice] 20#20: signal 17 (SIGCHLD) received from 41
+2025/10/25 15:10:14 [notice] 20#20: worker process 41 exited with code 0
+2025/10/25 15:10:14 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:10:15 [notice] 57#57: signal process started
+2025/10/25 15:10:15 [notice] 20#20: signal 1 (SIGHUP) received from 57, reconfiguring
+2025/10/25 15:10:15 [notice] 20#20: reconfiguring
+2025/10/25 15:10:15 [notice] 20#20: using the "epoll" event method
+2025/10/25 15:10:15 [notice] 20#20: start worker processes
+2025/10/25 15:10:15 [notice] 20#20: start worker process 58
+2025/10/25 15:10:15 [notice] 20#20: start worker process 59
+2025/10/25 15:10:15 [notice] 45#45: gracefully shutting down
+2025/10/25 15:10:15 [notice] 45#45: exiting
+2025/10/25 15:10:15 [notice] 45#45: exit
+2025/10/25 15:10:15 [notice] 46#46: gracefully shutting down
+2025/10/25 15:10:15 [notice] 46#46: exiting
+2025/10/25 15:10:15 [notice] 46#46: exit
+2025/10/25 15:10:15 [notice] 20#20: signal 17 (SIGCHLD) received from 45
+2025/10/25 15:10:15 [notice] 20#20: worker process 45 exited with code 0
+2025/10/25 15:10:15 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:10:15 [notice] 20#20: signal 17 (SIGCHLD) received from 46
+2025/10/25 15:10:15 [notice] 20#20: worker process 46 exited with code 0
+2025/10/25 15:10:15 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:14:32 [notice] 61#61: signal process started
+2025/10/25 15:14:32 [notice] 20#20: signal 1 (SIGHUP) received from 61, reconfiguring
+2025/10/25 15:14:32 [notice] 20#20: reconfiguring
+2025/10/25 15:14:32 [notice] 20#20: using the "epoll" event method
+2025/10/25 15:14:32 [notice] 20#20: start worker processes
+2025/10/25 15:14:32 [notice] 20#20: start worker process 62
+2025/10/25 15:14:32 [notice] 20#20: start worker process 63
+2025/10/25 15:14:32 [notice] 65#65: signal process started
+2025/10/25 15:14:32 [notice] 20#20: signal 1 (SIGHUP) received from 65, reconfiguring
+2025/10/25 15:14:32 [notice] 59#59: gracefully shutting down
+2025/10/25 15:14:32 [notice] 20#20: reconfiguring
+2025/10/25 15:14:32 [notice] 59#59: exiting
+2025/10/25 15:14:32 [notice] 59#59: exit
+2025/10/25 15:14:32 [notice] 58#58: gracefully shutting down
+2025/10/25 15:14:32 [notice] 58#58: exiting
+2025/10/25 15:14:32 [notice] 58#58: exit
+2025/10/25 15:14:32 [notice] 20#20: using the "epoll" event method
+2025/10/25 15:14:32 [notice] 20#20: start worker processes
+2025/10/25 15:14:32 [notice] 20#20: start worker process 66
+2025/10/25 15:14:32 [notice] 20#20: start worker process 67
+2025/10/25 15:14:32 [notice] 63#63: gracefully shutting down
+2025/10/25 15:14:32 [notice] 63#63: exiting
+2025/10/25 15:14:32 [notice] 63#63: exit
+2025/10/25 15:14:32 [notice] 62#62: gracefully shutting down
+2025/10/25 15:14:32 [notice] 62#62: exiting
+2025/10/25 15:14:32 [notice] 62#62: exit
+2025/10/25 15:14:32 [notice] 20#20: signal 17 (SIGCHLD) received from 58
+2025/10/25 15:14:32 [notice] 20#20: worker process 58 exited with code 0
+2025/10/25 15:14:32 [notice] 20#20: worker process 59 exited with code 0
+2025/10/25 15:14:32 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:14:32 [notice] 20#20: signal 17 (SIGCHLD) received from 63
+2025/10/25 15:14:32 [notice] 20#20: worker process 63 exited with code 0
+2025/10/25 15:14:32 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:14:32 [notice] 20#20: signal 17 (SIGCHLD) received from 62
+2025/10/25 15:14:32 [notice] 20#20: worker process 62 exited with code 0
+2025/10/25 15:14:32 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:14:33 [notice] 69#69: signal process started
+2025/10/25 15:14:33 [notice] 20#20: signal 1 (SIGHUP) received from 69, reconfiguring
+2025/10/25 15:14:33 [notice] 20#20: reconfiguring
+2025/10/25 15:14:33 [notice] 20#20: using the "epoll" event method
+2025/10/25 15:14:33 [notice] 20#20: start worker processes
+2025/10/25 15:14:33 [notice] 20#20: start worker process 70
+2025/10/25 15:14:33 [notice] 20#20: start worker process 71
+2025/10/25 15:14:33 [notice] 73#73: signal process started
+2025/10/25 15:14:33 [notice] 20#20: signal 1 (SIGHUP) received from 73, reconfiguring
+2025/10/25 15:14:33 [notice] 67#67: gracefully shutting down
+2025/10/25 15:14:33 [notice] 20#20: reconfiguring
+2025/10/25 15:14:33 [notice] 67#67: exiting
+2025/10/25 15:14:33 [notice] 67#67: exit
+2025/10/25 15:14:33 [notice] 66#66: gracefully shutting down
+2025/10/25 15:14:33 [notice] 66#66: exiting
+2025/10/25 15:14:33 [notice] 66#66: exit
+2025/10/25 15:14:33 [notice] 20#20: using the "epoll" event method
+2025/10/25 15:14:33 [notice] 20#20: start worker processes
+2025/10/25 15:14:33 [notice] 20#20: start worker process 74
+2025/10/25 15:14:33 [notice] 20#20: start worker process 75
+2025/10/25 15:14:33 [notice] 71#71: gracefully shutting down
+2025/10/25 15:14:33 [notice] 70#70: gracefully shutting down
+2025/10/25 15:14:33 [notice] 71#71: exiting
+2025/10/25 15:14:33 [notice] 70#70: exiting
+2025/10/25 15:14:33 [notice] 71#71: exit
+2025/10/25 15:14:33 [notice] 70#70: exit
+2025/10/25 15:14:33 [notice] 20#20: signal 17 (SIGCHLD) received from 66
+2025/10/25 15:14:33 [notice] 20#20: worker process 66 exited with code 0
+2025/10/25 15:14:33 [notice] 20#20: worker process 67 exited with code 0
+2025/10/25 15:14:33 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:14:33 [notice] 20#20: signal 17 (SIGCHLD) received from 71
+2025/10/25 15:14:33 [notice] 20#20: worker process 70 exited with code 0
+2025/10/25 15:14:33 [notice] 20#20: worker process 71 exited with code 0
+2025/10/25 15:14:33 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:14:33 [notice] 20#20: signal 17 (SIGCHLD) received from 70
+2025/10/25 15:15:18 [notice] 19#19: using the "epoll" event method
+2025/10/25 15:15:18 [notice] 19#19: nginx/1.29.2
+2025/10/25 15:15:18 [notice] 19#19: built by gcc 14.2.0 (Debian 14.2.0-19) 
+2025/10/25 15:15:18 [notice] 19#19: OS: Linux 6.8.0-60-generic
+2025/10/25 15:15:18 [notice] 19#19: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2025/10/25 15:15:18 [notice] 19#19: start worker processes
+2025/10/25 15:15:18 [notice] 19#19: start worker process 23
+2025/10/25 15:15:18 [notice] 19#19: start worker process 24
+2025/10/25 15:15:18 [notice] 27#27: signal process started
+2025/10/25 15:15:18 [notice] 19#19: signal 1 (SIGHUP) received from 27, reconfiguring
+2025/10/25 15:15:18 [notice] 19#19: reconfiguring
+2025/10/25 15:15:18 [notice] 19#19: using the "epoll" event method
+2025/10/25 15:15:18 [notice] 19#19: start worker processes
+2025/10/25 15:15:18 [notice] 19#19: start worker process 31
+2025/10/25 15:15:18 [notice] 19#19: start worker process 32
+2025/10/25 15:15:18 [notice] 23#23: gracefully shutting down
+2025/10/25 15:15:18 [notice] 23#23: exiting
+2025/10/25 15:15:18 [notice] 23#23: exit
+2025/10/25 15:15:18 [notice] 24#24: gracefully shutting down
+2025/10/25 15:15:18 [notice] 24#24: exiting
+2025/10/25 15:15:18 [notice] 24#24: exit
+2025/10/25 15:15:18 [notice] 19#19: signal 17 (SIGCHLD) received from 24
+2025/10/25 15:15:18 [notice] 19#19: worker process 24 exited with code 0
+2025/10/25 15:15:18 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:15:18 [notice] 19#19: signal 17 (SIGCHLD) received from 23
+2025/10/25 15:15:18 [notice] 19#19: worker process 23 exited with code 0
+2025/10/25 15:15:18 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:15:18 [notice] 35#35: signal process started
+2025/10/25 15:15:18 [notice] 19#19: signal 1 (SIGHUP) received from 35, reconfiguring
+2025/10/25 15:15:18 [notice] 19#19: reconfiguring
+2025/10/25 15:15:18 [notice] 19#19: using the "epoll" event method
+2025/10/25 15:15:18 [notice] 19#19: start worker processes
+2025/10/25 15:15:18 [notice] 19#19: start worker process 36
+2025/10/25 15:15:18 [notice] 19#19: start worker process 37
+2025/10/25 15:15:18 [notice] 31#31: gracefully shutting down
+2025/10/25 15:15:18 [notice] 31#31: exiting
+2025/10/25 15:15:18 [notice] 31#31: exit
+2025/10/25 15:15:18 [notice] 32#32: gracefully shutting down
+2025/10/25 15:15:18 [notice] 32#32: exiting
+2025/10/25 15:15:18 [notice] 32#32: exit
+2025/10/25 15:15:18 [notice] 19#19: signal 17 (SIGCHLD) received from 31
+2025/10/25 15:15:18 [notice] 19#19: worker process 31 exited with code 0
+2025/10/25 15:15:18 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:15:18 [notice] 19#19: signal 17 (SIGCHLD) received from 32
+2025/10/25 15:15:18 [notice] 19#19: worker process 32 exited with code 0
+2025/10/25 15:15:18 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:15:18 [notice] 39#39: signal process started
+2025/10/25 15:15:19 [notice] 19#19: signal 1 (SIGHUP) received from 39, reconfiguring
+2025/10/25 15:15:19 [notice] 19#19: reconfiguring
+2025/10/25 15:15:19 [notice] 19#19: using the "epoll" event method
+2025/10/25 15:15:19 [notice] 19#19: start worker processes
+2025/10/25 15:15:19 [notice] 19#19: start worker process 40
+2025/10/25 15:15:19 [notice] 19#19: start worker process 41
+2025/10/25 15:15:19 [notice] 36#36: gracefully shutting down
+2025/10/25 15:15:19 [notice] 36#36: exiting
+2025/10/25 15:15:19 [notice] 37#37: gracefully shutting down
+2025/10/25 15:15:19 [notice] 37#37: exiting
+2025/10/25 15:15:19 [notice] 37#37: exit
+2025/10/25 15:15:19 [notice] 36#36: exit
+2025/10/25 15:15:19 [notice] 19#19: signal 17 (SIGCHLD) received from 37
+2025/10/25 15:15:19 [notice] 19#19: worker process 37 exited with code 0
+2025/10/25 15:15:19 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:15:19 [notice] 19#19: signal 17 (SIGCHLD) received from 36
+2025/10/25 15:15:19 [notice] 19#19: worker process 36 exited with code 0
+2025/10/25 15:15:19 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:15:19 [notice] 52#52: signal process started
+2025/10/25 15:15:19 [notice] 19#19: signal 1 (SIGHUP) received from 52, reconfiguring
+2025/10/25 15:15:19 [notice] 19#19: reconfiguring
+2025/10/25 15:15:19 [notice] 19#19: using the "epoll" event method
+2025/10/25 15:15:19 [notice] 19#19: start worker processes
+2025/10/25 15:15:19 [notice] 19#19: start worker process 53
+2025/10/25 15:15:19 [notice] 19#19: start worker process 54
+2025/10/25 15:15:19 [notice] 40#40: gracefully shutting down
+2025/10/25 15:15:19 [notice] 40#40: exiting
+2025/10/25 15:15:19 [notice] 40#40: exit
+2025/10/25 15:15:19 [notice] 41#41: gracefully shutting down
+2025/10/25 15:15:19 [notice] 41#41: exiting
+2025/10/25 15:15:19 [notice] 41#41: exit
+2025/10/25 15:15:19 [notice] 19#19: signal 17 (SIGCHLD) received from 40
+2025/10/25 15:15:19 [notice] 19#19: worker process 40 exited with code 0
+2025/10/25 15:15:19 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:15:19 [notice] 19#19: signal 17 (SIGCHLD) received from 41
+2025/10/25 15:15:19 [notice] 19#19: worker process 41 exited with code 0
+2025/10/25 15:15:19 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:20:57 [notice] 79#79: signal process started
+2025/10/25 15:20:57 [notice] 19#19: signal 1 (SIGHUP) received from 79, reconfiguring
+2025/10/25 15:20:57 [notice] 19#19: reconfiguring
+2025/10/25 15:20:57 [notice] 19#19: using the "epoll" event method
+2025/10/25 15:20:57 [notice] 19#19: start worker processes
+2025/10/25 15:20:57 [notice] 19#19: start worker process 80
+2025/10/25 15:20:57 [notice] 19#19: start worker process 81
+2025/10/25 15:20:57 [notice] 83#83: signal process started
+2025/10/25 15:20:57 [notice] 53#53: gracefully shutting down
+2025/10/25 15:20:57 [notice] 53#53: exiting
+2025/10/25 15:20:57 [notice] 53#53: exit
+2025/10/25 15:20:57 [notice] 19#19: signal 1 (SIGHUP) received from 83, reconfiguring
+2025/10/25 15:20:57 [notice] 19#19: reconfiguring
+2025/10/25 15:20:57 [notice] 54#54: gracefully shutting down
+2025/10/25 15:20:57 [notice] 54#54: exiting
+2025/10/25 15:20:57 [notice] 54#54: exit
+2025/10/25 15:20:57 [notice] 19#19: using the "epoll" event method
+2025/10/25 15:20:57 [notice] 19#19: start worker processes
+2025/10/25 15:20:57 [notice] 19#19: start worker process 84
+2025/10/25 15:20:57 [notice] 19#19: start worker process 85
+2025/10/25 15:20:58 [notice] 80#80: gracefully shutting down
+2025/10/25 15:20:58 [notice] 80#80: exiting
+2025/10/25 15:20:58 [notice] 80#80: exit
+2025/10/25 15:20:58 [notice] 81#81: gracefully shutting down
+2025/10/25 15:20:58 [notice] 81#81: exiting
+2025/10/25 15:20:58 [notice] 81#81: exit
+2025/10/25 15:20:58 [notice] 19#19: signal 17 (SIGCHLD) received from 54
+2025/10/25 15:20:58 [notice] 19#19: worker process 53 exited with code 0
+2025/10/25 15:20:58 [notice] 19#19: worker process 54 exited with code 0
+2025/10/25 15:20:58 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:20:58 [notice] 19#19: signal 17 (SIGCHLD) received from 80
+2025/10/25 15:20:58 [notice] 19#19: worker process 80 exited with code 0
+2025/10/25 15:20:58 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:20:58 [notice] 19#19: signal 17 (SIGCHLD) received from 81
+2025/10/25 15:20:58 [notice] 19#19: worker process 81 exited with code 0
+2025/10/25 15:20:58 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:20:58 [notice] 87#87: signal process started
+2025/10/25 15:20:58 [notice] 19#19: signal 1 (SIGHUP) received from 87, reconfiguring
+2025/10/25 15:20:58 [notice] 19#19: reconfiguring
+2025/10/25 15:20:58 [notice] 19#19: using the "epoll" event method
+2025/10/25 15:20:58 [notice] 19#19: start worker processes
+2025/10/25 15:20:58 [notice] 19#19: start worker process 88
+2025/10/25 15:20:58 [notice] 19#19: start worker process 89
+2025/10/25 15:20:58 [notice] 91#91: signal process started
+2025/10/25 15:20:58 [notice] 84#84: gracefully shutting down
+2025/10/25 15:20:58 [notice] 84#84: exiting
+2025/10/25 15:20:58 [notice] 84#84: exit
+2025/10/25 15:20:58 [notice] 85#85: gracefully shutting down
+2025/10/25 15:20:58 [notice] 85#85: exiting
+2025/10/25 15:20:58 [notice] 85#85: exit
+2025/10/25 15:20:58 [notice] 19#19: signal 1 (SIGHUP) received from 91, reconfiguring
+2025/10/25 15:20:58 [notice] 19#19: reconfiguring
+2025/10/25 15:20:58 [notice] 19#19: using the "epoll" event method
+2025/10/25 15:20:58 [notice] 19#19: start worker processes
+2025/10/25 15:20:58 [notice] 19#19: start worker process 92
+2025/10/25 15:20:58 [notice] 19#19: start worker process 93
+2025/10/25 15:20:59 [notice] 89#89: gracefully shutting down
+2025/10/25 15:20:59 [notice] 88#88: gracefully shutting down
+2025/10/25 15:20:59 [notice] 89#89: exiting
+2025/10/25 15:20:59 [notice] 88#88: exiting
+2025/10/25 15:20:59 [notice] 89#89: exit
+2025/10/25 15:20:59 [notice] 88#88: exit
+2025/10/25 15:20:59 [notice] 19#19: signal 17 (SIGCHLD) received from 84
+2025/10/25 15:20:59 [notice] 19#19: worker process 84 exited with code 0
+2025/10/25 15:20:59 [notice] 19#19: worker process 85 exited with code 0
+2025/10/25 15:20:59 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:20:59 [notice] 19#19: signal 17 (SIGCHLD) received from 88
+2025/10/25 15:20:59 [notice] 19#19: worker process 88 exited with code 0
+2025/10/25 15:20:59 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:20:59 [notice] 19#19: signal 17 (SIGCHLD) received from 89
+2025/10/25 15:20:59 [notice] 19#19: worker process 89 exited with code 0
+2025/10/25 15:20:59 [notice] 19#19: signal 29 (SIGIO) received
+2025/10/25 15:21:28 [notice] 20#20: using the "epoll" event method
+2025/10/25 15:21:28 [notice] 20#20: nginx/1.29.2
+2025/10/25 15:21:28 [notice] 20#20: built by gcc 14.2.0 (Debian 14.2.0-19) 
+2025/10/25 15:21:28 [notice] 20#20: OS: Linux 6.8.0-60-generic
+2025/10/25 15:21:28 [notice] 20#20: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2025/10/25 15:21:28 [notice] 20#20: start worker processes
+2025/10/25 15:21:28 [notice] 20#20: start worker process 25
+2025/10/25 15:21:28 [notice] 20#20: start worker process 27
+2025/10/25 15:21:28 [notice] 28#28: signal process started
+2025/10/25 15:21:28 [notice] 20#20: signal 1 (SIGHUP) received from 28, reconfiguring
+2025/10/25 15:21:28 [notice] 20#20: reconfiguring
+2025/10/25 15:21:28 [notice] 20#20: using the "epoll" event method
+2025/10/25 15:21:28 [notice] 20#20: start worker processes
+2025/10/25 15:21:28 [notice] 20#20: start worker process 32
+2025/10/25 15:21:28 [notice] 20#20: start worker process 33
+2025/10/25 15:21:29 [notice] 25#25: gracefully shutting down
+2025/10/25 15:21:29 [notice] 25#25: exiting
+2025/10/25 15:21:29 [notice] 25#25: exit
+2025/10/25 15:21:29 [notice] 27#27: gracefully shutting down
+2025/10/25 15:21:29 [notice] 27#27: exiting
+2025/10/25 15:21:29 [notice] 27#27: exit
+2025/10/25 15:21:29 [notice] 20#20: signal 17 (SIGCHLD) received from 25
+2025/10/25 15:21:29 [notice] 20#20: worker process 25 exited with code 0
+2025/10/25 15:21:29 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:21:29 [notice] 20#20: signal 17 (SIGCHLD) received from 27
+2025/10/25 15:21:29 [notice] 20#20: worker process 27 exited with code 0
+2025/10/25 15:21:29 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:21:30 [notice] 43#43: signal process started
+2025/10/25 15:21:30 [notice] 20#20: signal 1 (SIGHUP) received from 43, reconfiguring
+2025/10/25 15:21:30 [notice] 20#20: reconfiguring
+2025/10/25 15:21:30 [notice] 45#45: signal process started
+2025/10/25 15:21:30 [notice] 20#20: using the "epoll" event method
+2025/10/25 15:21:30 [notice] 20#20: start worker processes
+2025/10/25 15:21:30 [notice] 20#20: start worker process 46
+2025/10/25 15:21:30 [notice] 20#20: start worker process 47
+2025/10/25 15:21:30 [notice] 32#32: gracefully shutting down
+2025/10/25 15:21:30 [notice] 32#32: exiting
+2025/10/25 15:21:30 [notice] 32#32: exit
+2025/10/25 15:21:30 [notice] 33#33: gracefully shutting down
+2025/10/25 15:21:30 [notice] 33#33: exiting
+2025/10/25 15:21:30 [notice] 33#33: exit
+2025/10/25 15:21:30 [notice] 20#20: signal 1 (SIGHUP) received from 45, reconfiguring
+2025/10/25 15:21:30 [notice] 20#20: reconfiguring
+2025/10/25 15:21:30 [notice] 20#20: using the "epoll" event method
+2025/10/25 15:21:30 [notice] 20#20: start worker processes
+2025/10/25 15:21:30 [notice] 20#20: start worker process 48
+2025/10/25 15:21:30 [notice] 20#20: start worker process 49
+2025/10/25 15:21:30 [notice] 46#46: gracefully shutting down
+2025/10/25 15:21:30 [notice] 46#46: exiting
+2025/10/25 15:21:30 [notice] 46#46: exit
+2025/10/25 15:21:30 [notice] 20#20: signal 17 (SIGCHLD) received from 33
+2025/10/25 15:21:30 [notice] 20#20: worker process 32 exited with code 0
+2025/10/25 15:21:30 [notice] 20#20: worker process 33 exited with code 0
+2025/10/25 15:21:30 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:21:30 [notice] 47#47: gracefully shutting down
+2025/10/25 15:21:30 [notice] 47#47: exiting
+2025/10/25 15:21:30 [notice] 47#47: exit
+2025/10/25 15:21:30 [notice] 20#20: signal 17 (SIGCHLD) received from 46
+2025/10/25 15:21:30 [notice] 20#20: worker process 46 exited with code 0
+2025/10/25 15:21:30 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:21:30 [notice] 20#20: signal 17 (SIGCHLD) received from 47
+2025/10/25 15:21:30 [notice] 20#20: worker process 47 exited with code 0
+2025/10/25 15:21:30 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:21:31 [notice] 52#52: signal process started
+2025/10/25 15:21:31 [notice] 20#20: signal 1 (SIGHUP) received from 52, reconfiguring
+2025/10/25 15:21:31 [notice] 20#20: reconfiguring
+2025/10/25 15:21:31 [notice] 20#20: using the "epoll" event method
+2025/10/25 15:21:31 [notice] 20#20: start worker processes
+2025/10/25 15:21:31 [notice] 20#20: start worker process 53
+2025/10/25 15:21:31 [notice] 20#20: start worker process 54
+2025/10/25 15:21:31 [notice] 48#48: gracefully shutting down
+2025/10/25 15:21:31 [notice] 48#48: exiting
+2025/10/25 15:21:31 [notice] 48#48: exit
+2025/10/25 15:21:31 [notice] 49#49: gracefully shutting down
+2025/10/25 15:21:31 [notice] 49#49: exiting
+2025/10/25 15:21:31 [notice] 49#49: exit
+2025/10/25 15:21:31 [notice] 20#20: signal 17 (SIGCHLD) received from 48
+2025/10/25 15:21:31 [notice] 20#20: worker process 48 exited with code 0
+2025/10/25 15:21:31 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:21:31 [notice] 20#20: signal 17 (SIGCHLD) received from 49
+2025/10/25 15:21:31 [notice] 20#20: worker process 49 exited with code 0
+2025/10/25 15:21:31 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:21:52 [notice] 56#56: signal process started
+2025/10/25 15:21:52 [notice] 20#20: signal 1 (SIGHUP) received from 56, reconfiguring
+2025/10/25 15:21:52 [notice] 20#20: reconfiguring
+2025/10/25 15:21:52 [notice] 20#20: using the "epoll" event method
+2025/10/25 15:21:52 [notice] 20#20: start worker processes
+2025/10/25 15:21:52 [notice] 20#20: start worker process 57
+2025/10/25 15:21:52 [notice] 20#20: start worker process 58
+2025/10/25 15:21:52 [notice] 60#60: signal process started
+2025/10/25 15:21:52 [notice] 53#53: gracefully shutting down
+2025/10/25 15:21:52 [notice] 53#53: exiting
+2025/10/25 15:21:52 [notice] 53#53: exit
+2025/10/25 15:21:52 [notice] 54#54: gracefully shutting down
+2025/10/25 15:21:52 [notice] 54#54: exiting
+2025/10/25 15:21:52 [notice] 54#54: exit
+2025/10/25 15:21:52 [notice] 20#20: signal 1 (SIGHUP) received from 60, reconfiguring
+2025/10/25 15:21:52 [notice] 20#20: reconfiguring
+2025/10/25 15:21:52 [notice] 20#20: using the "epoll" event method
+2025/10/25 15:21:52 [notice] 20#20: start worker processes
+2025/10/25 15:21:52 [notice] 20#20: start worker process 61
+2025/10/25 15:21:52 [notice] 20#20: start worker process 62
+2025/10/25 15:21:52 [notice] 57#57: gracefully shutting down
+2025/10/25 15:21:52 [notice] 57#57: exiting
+2025/10/25 15:21:52 [notice] 57#57: exit
+2025/10/25 15:21:52 [notice] 58#58: gracefully shutting down
+2025/10/25 15:21:52 [notice] 58#58: exiting
+2025/10/25 15:21:52 [notice] 58#58: exit
+2025/10/25 15:21:52 [notice] 20#20: signal 17 (SIGCHLD) received from 53
+2025/10/25 15:21:52 [notice] 20#20: worker process 53 exited with code 0
+2025/10/25 15:21:52 [notice] 20#20: worker process 54 exited with code 0
+2025/10/25 15:21:52 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:21:52 [notice] 20#20: signal 17 (SIGCHLD) received from 57
+2025/10/25 15:21:52 [notice] 20#20: worker process 57 exited with code 0
+2025/10/25 15:21:52 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:21:52 [notice] 20#20: signal 17 (SIGCHLD) received from 58
+2025/10/25 15:21:52 [notice] 20#20: worker process 58 exited with code 0
+2025/10/25 15:21:52 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:21:53 [notice] 64#64: signal process started
+2025/10/25 15:21:53 [notice] 20#20: signal 1 (SIGHUP) received from 64, reconfiguring
+2025/10/25 15:21:53 [notice] 20#20: reconfiguring
+2025/10/25 15:21:53 [notice] 20#20: using the "epoll" event method
+2025/10/25 15:21:53 [notice] 20#20: start worker processes
+2025/10/25 15:21:53 [notice] 20#20: start worker process 65
+2025/10/25 15:21:53 [notice] 20#20: start worker process 66
+2025/10/25 15:21:53 [notice] 68#68: signal process started
+2025/10/25 15:21:53 [notice] 61#61: gracefully shutting down
+2025/10/25 15:21:53 [notice] 61#61: exiting
+2025/10/25 15:21:53 [notice] 61#61: exit
+2025/10/25 15:21:53 [notice] 20#20: signal 1 (SIGHUP) received from 68, reconfiguring
+2025/10/25 15:21:53 [notice] 20#20: reconfiguring
+2025/10/25 15:21:53 [notice] 62#62: gracefully shutting down
+2025/10/25 15:21:53 [notice] 62#62: exiting
+2025/10/25 15:21:53 [notice] 62#62: exit
+2025/10/25 15:21:53 [notice] 20#20: using the "epoll" event method
+2025/10/25 15:21:53 [notice] 20#20: start worker processes
+2025/10/25 15:21:53 [notice] 20#20: start worker process 69
+2025/10/25 15:21:53 [notice] 20#20: start worker process 70
+2025/10/25 15:21:53 [notice] 65#65: gracefully shutting down
+2025/10/25 15:21:53 [notice] 66#66: gracefully shutting down
+2025/10/25 15:21:53 [notice] 65#65: exiting
+2025/10/25 15:21:53 [notice] 66#66: exiting
+2025/10/25 15:21:53 [notice] 20#20: signal 17 (SIGCHLD) received from 62
+2025/10/25 15:21:53 [notice] 20#20: worker process 61 exited with code 0
+2025/10/25 15:21:53 [notice] 20#20: worker process 62 exited with code 0
+2025/10/25 15:21:53 [notice] 20#20: signal 29 (SIGIO) received
+2025/10/25 15:21:53 [notice] 65#65: exit
+2025/10/25 15:21:53 [notice] 66#66: exit
+2025/10/25 15:21:53 [notice] 20#20: signal 17 (SIGCHLD) received from 66
+2025/10/25 15:21:53 [notice] 20#20: worker process 65 exited with code 0
+2025/10/25 15:21:53 [notice] 20#20: worker process 66 exited with code 0
+2025/10/25 15:21:53 [notice] 20#20: signal 29 (SIGIO) received
