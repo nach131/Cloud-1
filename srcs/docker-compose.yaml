@@ -120,28 +120,28 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ${TOMA}/data/certs
+      device: ${PATH}/data/certs
       o: bind
 
   dbdata:
       driver: local
       driver_opts:
           type: none
-          device: ${TOMA}/data/mysql
+          device: ${PATH}/data/mysql
           o: bind
 
   wp_files:
     driver: local
     driver_opts:
         type: none
-        device: ${TOMA}/data/wordpress
+        device: ${PATH}/data/wordpress
         o: bind
 
   www-nasa:
     driver: local
     driver_opts:
       type: none
-      device: ${TOMA}/data/nasa
+      device: ${PATH}/data/nasa
       o: bind
 
 networks:
