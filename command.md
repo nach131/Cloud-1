@@ -34,3 +34,16 @@ docker load -i mariadb_10.11.tar
 docker load -i nginx-proxy.tar
 docker load -i letsencrypt.tar
 ```
+
+# Ansible
+
+sudo apt remove ansible
+
+python3 -m pip install ansible
+
+python3 -m pip install --upgrade ansible
+
+ansible-galaxy collection install community.docker
+
+
+  
