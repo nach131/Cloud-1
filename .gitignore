@@ -4,3 +4,5 @@ data/mysql
 data/nasa
 data/wordpress
 data/certs
+data/logs
+.vscode
