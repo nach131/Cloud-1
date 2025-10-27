@@ -39,6 +39,10 @@ docker load -i letsencrypt.tar
 
 sudo apt remove ansible
 
+sudo apt install python3-venv -y
+
+install pyenv
+
 python3 -m pip install ansible
 
 python3 -m pip install --upgrade ansible

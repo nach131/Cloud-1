@@ -1,15 +1,17 @@
-x-web_base:: &web_base
-    image: web_base:1.1.0
-    build:
-      context: ./requirements/web    # image: nginx:latest
-    restart: unless-stopped
-    expose:
-      - "80"
-    depends_on:
-      - proxy
-      - letsencrypt
-    networks:
-      - cloud
+version: "3.9"
+
+x-web_base: &web_base
+  image: web_base:1.1.0
+  build:
+    context: ./requirements/web    # Imagen base personalizada (usa nginx:latest si no existe)
+  restart: unless-stopped
+  expose:
+    - "80"
+  depends_on:
+    - proxy
+    - letsencrypt
+  networks:
+    - cloud
 
 services:
 
@@ -23,19 +25,24 @@ services:
       MYSQL_USER: ${WORDPRESS_DB_USER}
       MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD}
     ports:
-      - "3306:3306"
+      - "3306:3306"  # ⚠️ Eliminarlo en producción)
     volumes:
       - dbdata:/var/lib/mysql
     networks:
       - cloud
 
   proxy:
+    image: nginxproxy/nginx-proxy:alpine
     container_name: proxy
     image: jwilder/nginx-proxy:1.8
     restart: always
     ports:
       - "80:80"
       - "443:443"
+    environment:
+      # Desactiva reloads excesivos por pequeños cambios
+      - ENABLE_IPV6=false
+      - RESOLVERS=1.1.1.1 8.8.8.8
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - certs-data:/etc/nginx/certs:ro
@@ -45,13 +52,13 @@ services:
     labels:
       - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
     networks:
-     - cloud
+      - cloud
 
   logrotate:
-    image: logrotate:1.0.0
-    container_name: logrotate
     build:
       context: ./requirements/logrotate
+    image: logrotate:1.0.0
+    container_name: logrotate
     volumes:
       - ${TOMA}/data/logs/proxy:/var/log/nginx
     restart: always
@@ -59,6 +66,7 @@ services:
       - cloud
 
   letsencrypt:
+    image: nginxproxy/acme-companion
     container_name: letsencrypt
     # image: jrcs/letsencrypt-nginx-proxy-companion
     image: jrcs/letsencrypt-nginx-proxy-companion:2.6.1
@@ -109,8 +117,8 @@ services:
       - ${TOMA}/data/logs/nasa:/var/log/nginx
 
   phpmyadmin:
-    container_name: phpmyadmin
     image: phpmyadmin:5.2.3
+    container_name: phpmyadmin
     restart: always
     depends_on:
       - ${PMA_HOST}
@@ -127,22 +135,6 @@ services:
     networks:
       - cloud
 
-  # adminer:
-  #   container_name: adminer
-  #   build: ./requirements/adminer
-  #   restart: always
-  #   ports:
-  #     - "8080"
-  #   networks:
-  #     - cloud
-  #   environment:
-  #     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-  #     - ADMINER_DEFAULT_SERVER=${PMA_HOST}
-  #     - ADMINER_HOST=${PMA_HOST}
-  #     - VIRTUAL_HOST=${ADMINER}.${DOMAIN},www.${ADMINER}.${DOMAIN}
-  #     - LETSENCRYPT_HOST=${ADMINER}.${DOMAIN},www.${ADMINER}.${DOMAIN}
-  #     - LETSENCRYPT_EMAIL=nacho@enunpimpam.com
-
 volumes:
   vhostd:
   acme:
@@ -155,18 +147,18 @@ volumes:
       o: bind
 
   dbdata:
-      driver: local
-      driver_opts:
-          type: none
-          device: ${TOMA}/data/mysql
-          o: bind
+    driver: local
+    driver_opts:
+      type: none
+      device: ${TOMA}/data/mysql
+      o: bind
 
   wp_files:
     driver: local
     driver_opts:
-        type: none
-        device: ${TOMA}/data/wordpress
-        o: bind
+      type: none
+      device: ${TOMA}/data/wordpress
+      o: bind
 
   www-nasa:
     driver: local
