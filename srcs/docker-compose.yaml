@@ -18,10 +18,10 @@ services:
     container_name: ${PMA_HOST}
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${WORDPRESS_DB_NAME}
-      - MYSQL_USER=${WORDPRESS_DB_USER}
-      - MYSQL_PASSWORD=${WORDPRESS_DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
+      MYSQL_USER: ${WORDPRESS_DB_USER}
+      MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
@@ -31,7 +31,7 @@ services:
 
   proxy:
     container_name: proxy
-    image: jwilder/nginx-proxy
+    image: jwilder/nginx-proxy:1.8
     restart: always
     ports:
       - "80:80"
@@ -60,11 +60,12 @@ services:
 
   letsencrypt:
     container_name: letsencrypt
-    image: jrcs/letsencrypt-nginx-proxy-companion
+    # image: jrcs/letsencrypt-nginx-proxy-companion
+    image: jrcs/letsencrypt-nginx-proxy-companion:2.6.1
     restart: unless-stopped
     environment:
-      - NGINX_PROXY_CONTAINER=proxy
-      - ACME_CA_URI=https://acme-staging-v02.api.letsencrypt.org/directory # ⚠️ para las pruebas
+      NGINX_PROXY_CONTAINER: proxy
+      ACME_CA_URI: https://acme-staging-v02.api.letsencrypt.org/directory # ⚠️ para las pruebas
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - certs-data:/etc/nginx/certs:rw
@@ -80,14 +81,14 @@ services:
     depends_on:
       - ${PMA_HOST}
     environment:
-      - WORDPRESS_DB_HOST=${PMA_HOST}
-      - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
-      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
-      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
-      - VIRTUAL_HOST=${DOMAIN},www.${DOMAIN}
-      - LETSENCRYPT_HOST=${DOMAIN},www.${DOMAIN}
-      - DOMAIN=${DOMAIN}
-      - LETSENCRYPT_EMAIL=nacho@enunpimpam.com
+      WORDPRESS_DB_HOST: ${PMA_HOST}
+      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+      VIRTUAL_HOST: ${DOMAIN},www.${DOMAIN}
+      LETSENCRYPT_HOST: ${DOMAIN},www.${DOMAIN}
+      DOMAIN: ${DOMAIN}
+      LETSENCRYPT_EMAIL: nacho@enunpimpam.com
     expose:
       - "80"
     volumes:
@@ -99,10 +100,10 @@ services:
     <<: *web_base
     container_name: web-nasa
     environment:
-      - VIRTUAL_HOST=${NASA}.${DOMAIN},www.${NASA}.${DOMAIN}
-      - LETSENCRYPT_HOST=${NASA}.${DOMAIN},www.${NASA}.${DOMAIN}
-      - DOMAIN=${NASA}
-      - LETSENCRYPT_EMAIL=nacho@enunpimpam.com
+      VIRTUAL_HOST: ${NASA}.${DOMAIN},www.${NASA}.${DOMAIN}
+      LETSENCRYPT_HOST: ${NASA}.${DOMAIN},www.${NASA}.${DOMAIN}
+      DOMAIN: ${NASA}
+      LETSENCRYPT_EMAIL: nacho@enunpimpam.com
     volumes:
       - www-nasa:/usr/share/nginx/html:ro
       - ${TOMA}/data/logs/nasa:/var/log/nginx
@@ -114,13 +115,13 @@ services:
     depends_on:
       - ${PMA_HOST}
     environment:
-      - PMA_HOST=${PMA_HOST}
+      PMA_HOST: ${PMA_HOST}
       # - PMA_USER=${WORDPRESS_DB_USER}
       # - PMA_PASSWORD=${WORDPRESS_DB_PASSWORD}
-      - UPLOAD_LIMIT=512M
-      - VIRTUAL_HOST=${PHPMYADMIN}.${DOMAIN},www.${PHPMYADMIN}.${DOMAIN}
-      - LETSENCRYPT_HOST=${PHPMYADMIN}.${DOMAIN},www.${PHPMYADMIN}.${DOMAIN}
-      - LETSENCRYPT_EMAIL=nacho@enunpimpam.com
+      UPLOAD_LIMIT: 512M
+      VIRTUAL_HOST: ${PHPMYADMIN}.${DOMAIN},www.${PHPMYADMIN}.${DOMAIN}
+      LETSENCRYPT_HOST: ${PHPMYADMIN}.${DOMAIN},www.${PHPMYADMIN}.${DOMAIN}
+      LETSENCRYPT_EMAIL: nacho@enunpimpam.com
     expose:
       - "80"
     networks:
