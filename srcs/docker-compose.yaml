@@ -1,5 +1,3 @@
-version: "3.9"
-
 x-web_base: &web_base
   image: web_base:1.1.0
   build:
@@ -24,17 +22,17 @@ services:
       MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
       MYSQL_USER: ${WORDPRESS_DB_USER}
       MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD}
-    ports:
-      - "3306:3306"  # ⚠️ Eliminarlo en producción)
+    # ports:
+    #   - "3306:3306"  # ⚠️ Eliminarlo en producción)
     volumes:
       - dbdata:/var/lib/mysql
     networks:
       - cloud
 
   proxy:
-    image: nginxproxy/nginx-proxy:alpine
-    container_name: proxy
     image: jwilder/nginx-proxy:1.8
+    # image: nginxproxy/nginx-proxy:alpine
+    container_name: proxy
     restart: always
     ports:
       - "80:80"
@@ -57,7 +55,7 @@ services:
   logrotate:
     build:
       context: ./requirements/logrotate
-    image: logrotate:1.0.0
+    image: logrotate:1.0.1
     container_name: logrotate
     volumes:
       - ${TOMA}/data/logs/proxy:/var/log/nginx
@@ -66,14 +64,13 @@ services:
       - cloud
 
   letsencrypt:
-    image: nginxproxy/acme-companion
-    container_name: letsencrypt
-    # image: jrcs/letsencrypt-nginx-proxy-companion
     image: jrcs/letsencrypt-nginx-proxy-companion:2.6.1
+    # image: nginxproxy/acme-companion
+    container_name: letsencrypt
     restart: unless-stopped
     environment:
       NGINX_PROXY_CONTAINER: proxy
-      ACME_CA_URI: https://acme-staging-v02.api.letsencrypt.org/directory # ⚠️ para las pruebas
+      # ACME_CA_URI: https://acme-staging-v02.api.letsencrypt.org/directory # ⚠️ para las pruebas
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - certs-data:/etc/nginx/certs:rw

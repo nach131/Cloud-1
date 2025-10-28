@@ -51,3 +51,9 @@ ansible-galaxy collection install community.docker
 
 
   
+Comprobacion ip
+
+dig nasa.cloud.enunpimpam.com +short
+
+***Forzar renovacion certrs***
+docker exec -it letsencrypt /app/force_renew
