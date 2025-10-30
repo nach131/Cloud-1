@@ -64,3 +64,8 @@ docker exec -it letsencrypt /app/force_renew
 ***Forzar renovacion un dominio***
 
 docker exec -it letsencrypt certbot renew --cert-name midominio.com --force-renewal
+
+***Comprobar certificados***
+
+docker exec -it letsencrypt ls /etc/nginx/certs/mi_dominio.com
+
