@@ -1,7 +1,7 @@
 x-web_base: &web_base
   image: web_base:1.1.0
   build:
-    context: ./requirements/web    # Imagen base personalizada (usa nginx:latest si no existe)
+    context: ./requirements/web
   restart: unless-stopped
   expose:
     - "80"
@@ -65,12 +65,11 @@ services:
 
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion:2.6.1
-    # image: nginxproxy/acme-companion
     container_name: letsencrypt
     restart: unless-stopped
     environment:
       NGINX_PROXY_CONTAINER: proxy
-      # ACME_CA_URI: https://acme-staging-v02.api.letsencrypt.org/directory # ⚠️ para las pruebas
+      ACME_CA_URI: https://acme-staging-v02.api.letsencrypt.org/directory # ⚠️ para las pruebas
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - certs-data:/etc/nginx/certs:rw

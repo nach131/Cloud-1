@@ -51,8 +51,115 @@ python3 -m pip install --upgrade ansible
 
 ansible-galaxy collection install community.docker
 
+***Ansible**
 
-  
+ansible-doc -l
+
+***/etc/host***
+Editar el fichero y coner los nombre e IP de los host
+
+***File hosts-control***
+Listado con las maquinas a controlar
+
+## Hacer ping a todos los nodos
+```sh
+ ansible -i hosts-control all -m ping
+```
+
+## Ejecutar comando
+```sh
+ansible -i hosts-control all -m command -a "touch /home/nacho/tomate.txt"
+
+ansible -i hosts-control cloud2 -m shell -a "echo 'mas' > /home/nacho/toma.txt"
+```
+
+```sh
+ansible -i hosts-control all -m shell -a "cat /home/nacho/toma.txt"
+cloud1 | CHANGED | rc=0 >>
+dededededede:wq
+cloud2 | CHANGED | rc=0 >>
+```
+
+### copiar carpeta a host
+```sh
+ansible -i hosts-control all -m copy -a "src=toma dest=/home/nacho"
+```
+
+### Borrar carpeta con sudo pondiendo password"
+```sh
+ ansible -i hosts-control cloud2 -m file -a "path=/home/nacho/Cloud-1 state=absent" -b --ask-become-pass 
+```
+### Buscar paquetes en ubuntu server
+```sh
+sudo apt search apache2 | less
+
+```
+## Instalado paquetes
+
+
+# **Usando el módulo `apt`**
+
+El módulo `apt` es la forma “Ansible way” de instalar paquetes en sistemas basados en Debian/Ubuntu.
+
+Ejemplo: instalar `apache2` en todos los hosts:
+
+```bash
+ansible -i hosts-control all -b -m apt -a "name=apache2 state=present update_cache=yes"
+```
+
+Explicación:
+
+* `-b` → usa sudo (necesario para instalar paquetes)
+* `-m apt` → módulo de gestión de paquetes para Debian/Ubuntu
+* `name=apache2` → paquete a instalar
+* `state=present` → asegura que esté instalado
+* `update_cache=yes` → actualiza la caché de paquetes antes de instalar
+
+---
+
+# **Instalar varios paquetes**
+
+Si quieres instalar varios paquetes a la vez:
+
+```bash
+ansible -i hosts-control all -b -m apt -a "name='apache2 curl git' state=present update_cache=yes"
+```
+
+> Nota: los nombres se separan por espacios, pero van entre comillas.
+
+---
+
+# ✅ **Opcional — Usar playbook para mayor control**
+
+Es más limpio y reutilizable con un playbook YAML:
+
+```yaml
+---
+- name: Instalar paquetes en todos los hosts
+  hosts: all
+  become: yes
+  tasks:
+    - name: Instalar apache2 y utilidades
+      apt:
+        name:
+          - apache2
+          - curl
+          - git
+        state: present
+        update_cache: yes
+```
+
+Ejecutar el playbook:
+
+```bash
+ansible-playbook -i hosts-control install_packages.yml
+```
+
+---
+
+
+
+
 Comprobacion ip
 
 dig nasa.cloud.enunpimpam.com +short
@@ -69,3 +176,9 @@ docker exec -it letsencrypt certbot renew --cert-name midominio.com --force-rene
 
 docker exec -it letsencrypt ls /etc/nginx/certs/mi_dominio.com
 
+
+
+## Cifrar claves vars
+```sh
+ansible-vault encrypt vars.yml
+```
