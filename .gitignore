@@ -7,3 +7,5 @@ data/certs
 data/docker_images_backup.tar.gz
 data/logs
 .vscode
+data.tar.gz
+nasa.zip
