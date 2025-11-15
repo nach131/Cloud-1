@@ -1,3 +1,4 @@
+```bash
 web_base                                 1.1.0                 79d26460b2f6   7 hours ago    152MB
 jwilder/nginx-proxy                      latest                4e68010bd2c2   13 hours ago   172MB
 jrcs/letsencrypt-nginx-proxy-companion   latest                7a6a0cb24375   6 days ago     48.4MB
@@ -5,6 +6,7 @@ srcs-adminer                             latest                d5c47055c9f7   10
 phpmyadmin                               5.2.3                 ee6c7d7460b5   2 weeks ago    575MB
 wordpress                                6.8.3-php8.3-apache   7332768c717f   3 weeks ago    734MB
 mariadb                                  10.11                 bc52d24721da   2 months ago   327MB
+```
 
 ## 2.- Guardar las imagenes en fichero .tar
 
@@ -56,4 +58,14 @@ Comprobacion ip
 dig nasa.cloud.enunpimpam.com +short
 
 ***Forzar renovacion certrs***
+
 docker exec -it letsencrypt /app/force_renew
+
+***Forzar renovacion un dominio***
+
+docker exec -it letsencrypt certbot renew --cert-name midominio.com --force-renewal
+
+***Comprobar certificados***
+
+docker exec -it letsencrypt ls /etc/nginx/certs/mi_dominio.com
+
