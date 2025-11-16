@@ -171,3 +171,8 @@ networks:
 # docker inspect phpmyadmin:latest | grep -i version
 
 # docker exec proxy bash -c "cat /etc/nginx/conf.d/default.conf | grep phpmyadmin"
+
+# GUARDAR LAS IMAGENES
+# docker save $(docker-compose -f docker-compose.yml config | grep 'image:' | awk '{print $2}') -o docker_images_backup.tar
+# COMPRIMIR PARA ENVIAR
+# gzip docker_images_backup.tar

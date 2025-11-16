@@ -1,80 +1,80 @@
 ---
-- name: Desplegar stack Docker Compose en producción
+- name: Desplegar stack Inception 42 Barelona
   hosts: all
   become: yes
   vars_files:
     - vars.yml
   tasks:
 
-    - name: Actualizar cache de paquetes
-      apt:
-        update_cache: yes
+    # - name: Actualizar cache de paquetes
+    #   apt:
+    #     update_cache: yes
 
-    - name: Instalar paquetes básicos
-      apt:
-        name:
-          - apt-transport-https
-          - ca-certificates
-          - curl
-          - gnupg
-          - lsb-release
-          - git
-          - software-properties-common
-          - tar
-        state: present
+    # - name: Instalar paquetes básicos
+    #   apt:
+    #     name:
+    #       - apt-transport-https
+    #       - ca-certificates
+    #       - curl
+    #       - gnupg
+    #       - lsb-release
+    #       - git
+    #       - software-properties-common
+    #       - tar
+    #     state: present
 
-    - name: Añadir llave GPG de Docker
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
+    # - name: Añadir llave GPG de Docker
+    #   apt_key:
+    #     url: https://download.docker.com/linux/ubuntu/gpg
+    #     state: present
 
-    - name: Añadir repositorio oficial de Docker
-      apt_repository:
-        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
-        state: present
+    # - name: Añadir repositorio oficial de Docker
+    #   apt_repository:
+    #     repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    #     state: present
 
-    - name: Actualizar cache después de añadir Docker
-      apt:
-        update_cache: yes
+    # - name: Actualizar cache después de añadir Docker
+    #   apt:
+    #     update_cache: yes
 
-    - name: Instalar Docker Engine y docker-compose
-      apt:
-        name:
-          - docker-ce
-          - docker-ce-cli
-          - containerd.io
-          - docker-compose
-        state: present
+    # - name: Instalar Docker Engine y docker-compose
+    #   apt:
+    #     name:
+    #       - docker-ce
+    #       - docker-ce-cli
+    #       - containerd.io
+    #       - docker-compose
+    #     state: present
 
-    - name: Asegurar que usuario nacho puede usar Docker sin sudo
-      user:
-        name: nacho
-        groups: docker
-        append: yes
+    # - name: Asegurar que usuario nacho puede usar Docker sin sudo
+    #   user:
+    #     name: nacho
+    #     groups: docker
+    #     append: yes
 
-    - name: Crear carpeta principal para docker-compose
-      file:
-        path: "{{ toma_path }}"
-        state: directory
-        owner: nacho
-        group: nacho
-        mode: "0755"
-        recurse: yes
+    # - name: Clonar repositorio con docker-compose
+    #   git:
+    #     repo: 'git@github.com:nach131/Cloud-1.git'   # Cambia por tu repo
+    #     dest: "{{ toma_path }}"
+    #     version: main
+    #     force: yes            # fuerza actualización si ya existe
+    #     update: yes           # actualiza si ya está clonado
+    #   become_user: nacho
 
-    - name: Crear subcarpetas necesarias para docker-compose
-      file:
-        path: "{{ toma_path }}/data/{{ item }}"
-        state: directory
-        owner: nacho
-        group: nacho
-        mode: "0755"
-      loop:
-        - logs/proxy
-        - logs/nasa
-        - mysql
-        - wordpress
-        - nasa
-        - certs
+    # - name: Crear subcarpetas necesarias para docker-compose
+    #   file:
+    #     path: "{{ toma_path }}/data/{{ item }}"
+    #     state: directory
+    #     owner: nacho
+    #     group: nacho
+    #     mode: "0755"
+    #   loop:
+    #     - logs/proxy
+    #     - logs/nasa
+    #     - mysql
+    #     - wordpress
+    #     - nasa
+    #     - certs
 
     - name: Copiar docker-compose.yml al host
       copy:
@@ -87,44 +87,45 @@
     - name: Generar fichero .env desde plantilla
       template:
         src: env.j2
-        dest: "{{ toma_path }}/.env"
+        dest: "/home/nacho/Cloud-1/srcs/.env"
         owner: nacho
         group: nacho
         mode: "0600"
 
     - name: Copiar data.tar.gz al host
       copy:
-        src: ./data.tar.gz
-        dest: "{{ toma_path }}/data.tar.gz"
+        src: /home/nacho/data.tar.gz
+        dest: "/home/nacho/Cloud-1/data.tar.gz"
         owner: nacho
         group: nacho
         mode: "0644"
 
     - name: Descomprimir data.tar.gz
       unarchive:
-        src: "{{ toma_path }}/data.tar.gz"
-        dest: "{{ toma_path }}/data"
+        src: /home/nacho/Cloud-1/data.tar.gz
+        dest: /home/nacho/Cloud-1
         remote_src: yes
         owner: nacho
         group: nacho
 
     - name: Copiar docker_images_backup.tar.gz al host
       copy:
-        src: ./docker_images_backup.tar.gz
-        dest: "{{ toma_path }}/docker_images_backup.tar.gz"
+        src: /home/nacho/docker_images_backup.tar.gz
+        dest: /home/nacho/docker_images_backup.tar.gz
         owner: nacho
         group: nacho
         mode: "0644"
 
     - name: Cargar imágenes de Docker desde el backup
       become_user: nacho
-      shell: docker load -i {{ toma_path }}/docker_images_backup.tar.gz
+      shell: docker load -i /home/nacho/docker_images_backup.tar.gz
 
     - name: Levantar servicios con docker-compose
       become_user: nacho
       shell: docker-compose up -d
       args:
-        chdir: "{{ toma_path }}"
-
+        chdir: "/home/nacho/Cloud-1/srcs"
 
 # ansible-playbook -i hosts-control deploy_stack.yml --ask-become-pass --ask-vault-pass
+
+# ansible-playbook -i hosts-control deploy_stack.yml -l cloud2 --ask-become-pass --ask-vault-pass
