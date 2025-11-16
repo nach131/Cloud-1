@@ -1,0 +1,5 @@
+- name: Reboot the system
+  reboot:
+    msg: "Reboot required so docker group membership takes effect"
+    pre_reboot_delay: 5
+    reboot_timeout: 600

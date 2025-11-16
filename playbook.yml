@@ -1,0 +1,17 @@
+- name: Install Docker and prepare system
+  hosts: all
+  become: yes
+  roles:
+    - docker_install
+
+- name: Reboot for docker group to take effect
+  hosts: all
+  become: yes
+  roles:
+    - reboot_host
+
+- name: Verify Docker and deploy stack
+  hosts: all
+  become: yes
+  roles:
+    - docker_check

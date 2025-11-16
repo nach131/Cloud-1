@@ -74,28 +74,37 @@
           - docker-compose-plugin
         state: present
 
-    # 9 — Ensure Docker service is running
-    - name: Ensure Docker is running
-      systemd:
+      # 9 — Ensure docker group exists
+    - name: Ensure docker group exists
+      group:
         name: docker
-        state: started
-        enabled: yes
-
-    # 10 — Check Docker status
-    - name: Check Docker service status
-      command: systemctl is-active docker
-      register: docker_status
-      changed_when: false
-
-    - name: Show Docker status
-      debug:
-        msg: "Docker status: {{ docker_status.stdout }}"
-
+        state: present
+        
     - name: Add user nacho to docker group
       user:
         name: "nacho"
         groups: docker
         append: yes
+
+
+    # # 10 — Ensure Docker service is running
+    # - name: Ensure Docker is running
+    #   systemd:
+    #     name: docker
+    #     state: started
+    #     enabled: yes
+
+    # # 11 — Check Docker status
+    # - name: Check Docker service status
+    #   command: systemctl is-active docker
+    #   register: docker_status
+    #   changed_when: false
+
+    # - name: Show Docker status
+    #   debug:
+    #     msg: "Docker status: {{ docker_status.stdout }}"
+
+
 
 # ansible-playbook -i hosts-control deploy_stack.yml --ask-become-pass --ask-vault-pass
 

@@ -122,6 +122,14 @@
       args:
         chdir: "{{ cloud_dir }}"
 
+    # - name: Levantar servicios con docker-compose v2
+    #   community.docker.docker_compose_v2:
+    #     project_src: "{{ cloud_dir }}"
+    #     state: present
+    #     build: no       # hacer build de imágenes, cambia a yes
+    #     # restarted: yes  # opcional, reinicia contenedores si cambian
+    #   become_user: "{{ user_name }}"
+
 #  ====================================================================================
 
 # ansible-playbook -i hosts-control deploy_stack.yml --ask-become-pass --ask-vault-pass

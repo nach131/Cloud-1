@@ -1,0 +1,24 @@
+- name: Ensure Docker service is running
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Check Docker status
+  command: systemctl is-active docker
+  register: docker_status
+  changed_when: false
+
+- name: Show Docker status
+  debug:
+    msg: "Docker status: {{ docker_status.stdout }}"
+
+- name: Test docker without sudo
+  become_user: nacho
+  command: docker ps
+  register: docker_ps
+  changed_when: false
+
+- name: Show docker ps output
+  debug:
+    var: docker_ps.stdout
