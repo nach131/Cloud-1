@@ -96,24 +96,8 @@
         name: "nacho"
         groups: docker
         append: yes
-
-    - name: Clonar repositorio Cloud-1
-      git:
-        repo: 'git@github.com:nach131/Cloud-1.git'
-        dest: "{{ toma_path }}"
-        version: main
-        force: yes            # fuerza actualización si ya existe
-        update: yes           # actualiza si ya está clonado
-      become_user: nacho
-
-    - name: Generar fichero .env desde plantilla
-      template:
-        src: env.j2
-        dest: "/home/nacho/Cloud-1/.env"
-        owner: nacho
-        group: nacho
-        mode: "0600"
-
+    
+    # 11 - Copiar Datos 
     - name: Copiar data.tar.gz al host
       copy:
         src: /home/nacho/data.tar.gz
@@ -130,6 +114,86 @@
         remote_src: yes
         owner: nacho
         group: nacho
+
+    # 12 - key para Deploy 
+    - name: Create .ssh directory for the user
+      file:
+        path: /home/nacho/.ssh
+        state: directory
+        owner: nacho
+        group: nacho
+        mode: '0700'
+
+    - name: Copy private deploy key
+      copy:
+        src: /home/nacho/Cloud-1/data/keys/deploy_key_cloud
+        dest: /home/nacho/.ssh/deploy_key_cloud
+        owner: nacho
+        group: nacho
+        mode: '0600'
+
+    - name: Copy public deploy key
+      copy:
+        src: /home/nacho/Cloud-1/data/keys/deploy_key_cloud.pub
+        dest: /home/nacho/.ssh/deploy_key_cloud.pub
+        owner: nacho
+        group: nacho
+        mode: '0644'
+
+    - name: Add GitHub to known_hosts
+      known_hosts:
+        path: /home/nacho/.ssh/known_hosts
+        name: github.com
+        key: "{{ lookup('pipe','ssh-keyscan github.com') }}"
+        state: present
+
+    - name: Set correct permissions on known_hosts
+      file:
+        path: /home/nacho/.ssh/known_hosts
+        owner: nacho
+        group: nacho
+        mode: '0644'
+
+    - name: Configure SSH to use deploy key for GitHub
+      copy:
+        dest: /home/nacho/.ssh/config
+        owner: nacho
+        group: nacho
+        mode: '0600'
+        content: |
+          Host github.com
+              HostName github.com
+              User git
+              IdentityFile /home/nacho/.ssh/deploy_key_cloud
+              IdentitiesOnly yes
+
+    - name: Test SSH connection to GitHub
+      become_user: nacho
+      command: ssh -T git@github.com
+      register: github_test
+      failed_when: "'successfully authenticated' not in github_test.stderr" # solo muestra si es err
+
+    - name: Show GitHub SSH test result
+      debug:
+        var: github_test.stdout
+
+    # 12 - Clonar repo
+    - name: Clonar repositorio Cloud-1
+      git:
+        repo: 'git@github.com:nach131/Cloud-1.git'
+        dest: w
+        version: main
+        force: yes            # fuerza actualización si ya existe
+        update: yes           # actualiza si ya está clonado
+      become_user: nacho
+
+    - name: Generar fichero .env desde plantilla
+      template:
+        src: env.j2
+        dest: "/home/nacho/Cloud-1/.env"
+        owner: nacho
+        group: nacho
+        mode: "0600"
 
     - name: Copiar docker_images_backup.tar.gz al host
       copy:

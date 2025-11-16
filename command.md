@@ -148,8 +148,6 @@ ansible-playbook -i hosts-control install_packages.yml
 ---
 
 
-
-
 Comprobacion ip
 
 dig nasa.cloud.enunpimpam.com +short

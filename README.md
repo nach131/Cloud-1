@@ -107,8 +107,6 @@ ansible-playbook -i hosts-control deploy_stack.yml --ask-become-pass --vault-pas
 ansible-playbook -i hosts-control deploy_stack.yml -l cloud2,cloud3 --ask-become-pass
 ```
 
----
-
 ## Generar una deploy key
 
 ```sh
