@@ -1,19 +1,38 @@
-- name: Comprobar que existen los ficheros requeridos
-  vars:
-    required_files:
-      - "{{ data_tar }}"
-      - "{{ keys_tar }}"
-      - "{{ docker_backup }}"
+    # - name: Comprobar que existen los ficheros requeridos
+    #   become: no  # Se ejecuta como usuario normal (nacho)
+    #   vars:
+    #     required_files:
+    #       - "{{ data_tar }}"
+    #       - "{{ keys_tar }}"
+    #       - "{{ docker_backup }}"
+    #   block:
+    #     - name: Verificar archivos
+    #       stat:
+    #         path: "{{ item }}"
+    #       register: file_stat
+    #       loop: "{{ required_files }}"
 
-  block:
-    - name: Verificar archivoss
-      stat:
-        path: "{{ item }}"
-      register: file_stat
-      loop: "{{ required_files }}"
+    #     - name: Fallar si falta algún fichero
+    #       fail:
+    #         msg: "Falta el fichero requerido: {{ item.item }}"
+    #       when: not item.stat.exists
+    #       loop: "{{ file_stat.results }}"
 
-    - name: Fallar si falta algún fichero
-      fail:
-        msg: "Falta el fichero requerido: {{ item.item }}"
-      when: not item.stat.exists
-      loop: "{{ file_stat.results }}"
+- name: Remove CD-ROM entries from sources.list
+  ansible.builtin.lineinfile:
+    path: /etc/apt/sources.list
+    regexp: '^deb cdrom:'
+    state: absent
+  become: yes
+
+- name: Clean APT cache
+  ansible.builtin.apt:
+    autoclean: yes
+    update_cache: yes
+  become: yes
+
+- name: Update package lists
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  become: yes

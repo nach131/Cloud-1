@@ -1,4 +1,4 @@
-- name: Copiar data.tar.gz al host
+- name: Copy data.tar.gz al host
   copy:
     src: "{{ data_tar }}"
     dest: "{{ data_tar }}"

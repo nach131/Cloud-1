@@ -1,11 +1,10 @@
-- name: Check required backup files before starting
-  hosts: all
-  become: yes
-  vars_files:
-    - vars.yml
-    - paths.yml
-  roles:
-    - check_backup_files
+# - name: Prepare system before deploying stack
+#   hosts: all
+#   become: yes
+#   vars_files:
+#     - vars.yml
+#   roles:
+#     - check_backup_files
 
 - name: Install Docker and prepare system
   hosts: all
@@ -25,7 +24,7 @@
   roles:
     - docker_check
 
-- name: Desplegar stack Inception 42 Barcelona
+- name: Deploy stack Inception 42 Barcelona
   hosts: all
   become: yes
   vars_files:
