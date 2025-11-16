@@ -6,3 +6,5 @@ ssh_dir: "{{ home_dir }}/.ssh"
 data_tar: "{{ home_dir }}/data.tar.gz"
 keys_tar: "{{ home_dir }}/keys.tar.gz"
 docker_backup: "{{ home_dir }}/docker_images_backup.tar.gz"
+
+# LOS FICHERO TIENE QUE ESTAR EN LA HOME DE NACHO

@@ -10,3 +10,4 @@ data/logs
 data.tar.gz
 nasa.zip
 keys
+.venv/

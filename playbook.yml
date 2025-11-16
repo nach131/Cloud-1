@@ -29,5 +29,8 @@
     - docker_images
     - start_app
 
+# ### EJECUCION ######
+
+# ansible-playbook -i hosts-control playbook.yml --ask-become-pass --ask-vault-pass
 
 # ansible-playbook -i hosts-control playbook.yml -l cloud2 --ask-become-pass --ask-vault-pass
