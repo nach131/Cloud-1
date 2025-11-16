@@ -1,0 +1,19 @@
+- name: Comprobar que existen los ficheros requeridos
+  vars:
+    required_files:
+      - "{{ data_tar }}"
+      - "{{ keys_tar }}"
+      - "{{ docker_backup }}"
+
+  block:
+    - name: Verificar archivoss
+      stat:
+        path: "{{ item }}"
+      register: file_stat
+      loop: "{{ required_files }}"
+
+    - name: Fallar si falta algún fichero
+      fail:
+        msg: "Falta el fichero requerido: {{ item.item }}"
+      when: not item.stat.exists
+      loop: "{{ file_stat.results }}"
