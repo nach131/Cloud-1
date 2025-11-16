@@ -1,0 +1,16 @@
+- name: Clonar repositorio Cloud-1
+  git:
+    repo: 'git@github.com:nach131/Cloud-1.git'
+    dest: "{{ cloud_dir }}/"
+    version: main
+    force: yes
+    update: yes
+  become_user: "{{ user_name }}"
+
+- name: Generar fichero .env desde plantilla
+  template:
+    src: env.j2
+    dest: "{{ cloud_dir }}/.env"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0600"

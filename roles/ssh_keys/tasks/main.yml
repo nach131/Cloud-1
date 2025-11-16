@@ -1,0 +1,64 @@
+- name: Copiar keys deploy al host
+  copy:
+    src: "{{ keys_tar }}"
+    dest: "{{ keys_tar }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+
+- name: Descomprimir keys.tar.gz
+  unarchive:
+    src: "{{ keys_tar }}"
+    dest: "{{ home_dir }}"
+    remote_src: yes
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+
+- name: Mover deploy key al .ssh
+  command: mv "{{ home_dir }}/keys/deploy_key_cloud" "{{ ssh_dir }}/deploy_key_cloud"
+  args:
+    removes: "{{ home_dir }}/keys/deploy_key_cloud"
+
+- name: Cambiar propietario y permisos de la clave privada
+  file:
+    path: "{{ ssh_dir }}/deploy_key_cloud"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: '0600'
+
+- name: Add GitHub to known_hosts
+  known_hosts:
+    path: "{{ ssh_dir }}/known_hosts"
+    name: github.com
+    key: "{{ lookup('pipe','ssh-keyscan github.com') }}"
+    state: present
+
+- name: Set correct permissions on known_hosts
+  file:
+    path: "{{ ssh_dir }}/known_hosts"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: '0644'
+
+- name: Configure SSH to use deploy key for GitHub
+  copy:
+    dest: "{{ ssh_dir }}/config"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: '0600'
+    content: |
+      Host github.com
+          HostName github.com
+          User git
+          IdentityFile "{{ ssh_dir }}/deploy_key_cloud"
+          IdentitiesOnly yes
+
+- name: Test SSH connection to GitHub
+  become_user: "{{ user_name }}"
+  command: ssh -T git@github.com
+  register: github_test
+  failed_when: "'successfully authenticated' not in github_test.stderr"
+
+- name: Show GitHub SSH test result
+  debug:
+    var: github_test.stdout

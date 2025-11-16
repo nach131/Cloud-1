@@ -1,0 +1,11 @@
+- name: Levantar servicios con docker-compose
+  become_user: "{{ user_name }}"
+  shell: docker compose up -d
+  args:
+    chdir: "{{ cloud_dir }}"
+
+# - name: Levantar stack con docker compose v2
+#   community.docker.docker_compose_v2:
+#     project_src: "{{ cloud_dir }}"
+#     state: present
+#   become_user: "{{ user_name }}"

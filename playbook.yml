@@ -1,17 +1,33 @@
-- name: Install Docker and prepare system
-  hosts: all
-  become: yes
-  roles:
-    - docker_install
+# - name: Install Docker and prepare system
+#   hosts: all
+#   become: yes
+#   roles:
+#     - docker_install
 
-- name: Reboot for docker group to take effect
-  hosts: all
-  become: yes
-  roles:
-    - reboot_host
+# - name: Reboot for docker group to take effect
+#   hosts: all
+#   become: yes
+#   roles:
+#     - reboot_host
 
-- name: Verify Docker and deploy stack
+# - name: Verify Docker and deploy stack
+#   hosts: all
+#   become: yes
+#   roles:
+#     - docker_check
+
+- name: Desplegar stack Inception 42 Barcelona
   hosts: all
   become: yes
+  vars_files:
+    - vars.yml
+    - paths.yml
   roles:
-    - docker_check
+    - ssh_keys
+    - github_clone
+    - data_restore
+    - docker_images
+    - start_app
+
+
+#  ansible-playbook -i hosts-control deploy_stack.yml -l cloud2 --ask-become-pass --ask-vault-pass`

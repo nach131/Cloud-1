@@ -1,0 +1,15 @@
+- name: Copiar data.tar.gz al host
+  copy:
+    src: "{{ data_tar }}"
+    dest: "{{ data_tar }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+
+- name: Descomprimir data.tar.gz
+  unarchive:
+    src: "{{ data_tar }}"
+    dest: "{{ cloud_dir }}"
+    remote_src: yes
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"

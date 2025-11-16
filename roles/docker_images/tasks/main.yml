@@ -1,0 +1,11 @@
+- name: Copiar docker_images_backup.tar.gz al host
+  copy:
+    src: "{{ docker_backup }}"
+    dest: "{{ docker_backup }}"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0644"
+
+- name: Cargar imágenes de Docker desde el backup
+  become_user: "{{ user_name }}"
+  shell: "docker load -i {{ docker_backup }}"
