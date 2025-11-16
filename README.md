@@ -210,7 +210,6 @@ Then:
 ```bash
 docker-compose down && docker-compose up -d
 ```
-
 ---
 
 ## Testing & Verification

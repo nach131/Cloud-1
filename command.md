@@ -170,3 +170,8 @@ docker exec -it letsencrypt ls /etc/nginx/certs/mi_dominio.com
 ```sh
 ansible-vault encrypt vars.yml
 ```
+
+## eliminar todas las entradas de CD-ROM:
+```sh
+sudo sed -i '/cdrom/d' /etc/apt/sources.list
+```

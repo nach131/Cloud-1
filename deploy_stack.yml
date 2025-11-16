@@ -5,140 +5,35 @@
     - vars.yml
   tasks:
 
-    # 1 — Uninstall old versions
-    - name: Remove old Docker packages
-      apt:
-        name:
-          - docker.io
-          - docker-doc
-          - docker-compose
-          - docker-compose-v2
-          - podman-docker
-          - containerd
-          - runc
-        state: absent
-        purge: yes
-
-    # 2 — apt update
-    - name: Update apt cache
-      apt:
-        update_cache: yes
-
-    # 3 — Install dependencies
-    - name: Install ca-certificates and curl
-      apt:
-        name:
-          - ca-certificates
-          - curl
-        state: present
-
-    # 4 — Create keyrings directory
-    - name: Create /etc/apt/keyrings directory
-      file:
-        path: /etc/apt/keyrings
-        state: directory
-        mode: '0755'
-
-    # 5 — Download Docker GPG key
-    - name: Download Docker GPG key
-      get_url:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        dest: /etc/apt/keyrings/docker.asc
-        mode: '0644'
-
-    # 6 — Add Docker repo using the new .sources format
-    - name: Add Docker apt repository in .sources format
+        # 11 - Copiar keys
+    - name: Copiar keys deploy al host
       copy:
-        dest: /etc/apt/sources.list.d/docker.sources
-        mode: '0644'
-        content: |
-          Types: deb
-          URIs: https://download.docker.com/linux/ubuntu
-          Suites: {{ ansible_facts['lsb']['codename'] }}
-          Components: stable
-          Signed-By: /etc/apt/keyrings/docker.asc
-
-    # 7 — apt update again
-    - name: Update apt cache after adding Docker repo
-      apt:
-        update_cache: yes
-
-    # 8 — Install Docker packages
-    - name: Install Docker Engine packages
-      apt:
-        name:
-          - docker-ce
-          - docker-ce-cli
-          - containerd.io
-          - docker-buildx-plugin
-          - docker-compose-plugin
-        state: present
-
-    # 9 — Ensure Docker service is running
-    - name: Ensure Docker is running
-      systemd:
-        name: docker
-        state: started
-        enabled: yes
-
-    # 10 — Check Docker status
-    - name: Check Docker service status
-      command: systemctl is-active docker
-      register: docker_status
-      changed_when: false
-
-    - name: Show Docker status
-      debug:
-        msg: "Docker status: {{ docker_status.stdout }}"
-
-    - name: Add user nacho to docker group
-      user:
-        name: "nacho"
-        groups: docker
-        append: yes
-    
-    # 11 - Copiar Datos 
-    - name: Copiar data.tar.gz al host
-      copy:
-        src: /home/nacho/data.tar.gz
+        src: /home/nacho/keys.tar.gz
         # src: "{{ local_data_path }}/data.tar.gz"
-        dest: "/home/nacho/Cloud-1/data.tar.gz"
+        dest: "/home/nacho/keys.tar.gz"
         owner: nacho
         group: nacho
         mode: "0644"
 
-    - name: Descomprimir data.tar.gz
+    - name: Descomprimir keys.tar.gz
       unarchive:
-        src: /home/nacho/Cloud-1/data.tar.gz
-        dest: /home/nacho/Cloud-1
+        src: /home/nacho/keys.tar.gz
+        dest: /home/nacho
         remote_src: yes
         owner: nacho
         group: nacho
 
-    # 12 - key para Deploy 
-    - name: Create .ssh directory for the user
-      file:
-        path: /home/nacho/.ssh
-        state: directory
-        owner: nacho
-        group: nacho
-        mode: '0700'
+    - name: Mover deploy key al .ssh
+      command: mv /home/nacho/keys/deploy_key_cloud /home/nacho/.ssh/deploy_key_cloud
+      args:
+        removes: /home/nacho/keys/deploy_key_cloud
 
-    - name: Copy private deploy key
-      copy:
-        src: /home/nacho/Cloud-1/data/keys/deploy_key_cloud
-        dest: /home/nacho/.ssh/deploy_key_cloud
+    - name: Cambiar propietario y permisos de la clave privada
+      file:
+        path: /home/nacho/.ssh/deploy_key_cloud
         owner: nacho
         group: nacho
         mode: '0600'
-
-    - name: Copy public deploy key
-      copy:
-        src: /home/nacho/Cloud-1/data/keys/deploy_key_cloud.pub
-        dest: /home/nacho/.ssh/deploy_key_cloud.pub
-        owner: nacho
-        group: nacho
-        mode: '0644'
 
     - name: Add GitHub to known_hosts
       known_hosts:
@@ -181,7 +76,7 @@
     - name: Clonar repositorio Cloud-1
       git:
         repo: 'git@github.com:nach131/Cloud-1.git'
-        dest: w
+        dest: /home/nacho/Cloud-1/
         version: main
         force: yes            # fuerza actualización si ya existe
         update: yes           # actualiza si ya está clonado
@@ -194,6 +89,24 @@
         owner: nacho
         group: nacho
         mode: "0600"
+
+      # 11 - Copiar Datos 
+    - name: Copiar data.tar.gz al host
+      copy:
+        src: /home/nacho/data.tar.gz
+        # src: "{{ local_data_path }}/data.tar.gz"
+        dest: "/home/nacho/Cloud-1/data.tar.gz"
+        owner: nacho
+        group: nacho
+        mode: "0644"
+
+    - name: Descomprimir data.tar.gz
+      unarchive:
+        src: /home/nacho/Cloud-1/data.tar.gz
+        dest: /home/nacho/Cloud-1
+        remote_src: yes
+        owner: nacho
+        group: nacho
 
     - name: Copiar docker_images_backup.tar.gz al host
       copy:
@@ -209,7 +122,7 @@
 
     - name: Levantar servicios con docker-compose
       become_user: nacho
-      shell: docker-compose up -d
+      shell: docker compose up -d
       args:
         chdir: "/home/nacho/Cloud-1"
 
