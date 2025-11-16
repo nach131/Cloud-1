@@ -8,48 +8,38 @@ wordpress                                6.8.3-php8.3-apache   7332768c717f   3 
 mariadb                                  10.11                 bc52d24721da   2 months ago   327MB
 ```
 
-## 2.- Guardar las imagenes en fichero .tar
-
-```bash
-docker save web_base:1.1.0 -o web_base_1.1.0.tar
-docker save wordpress:6.8.3-php8.3-apache -o wordpress_6.8.3_php8.3_apache.tar
-docker save phpmyadmin:5.2.3 -o phpmyadmin_5.2.3.tar
-docker save mariadb:10.11 -o mariadb_10.11.tar
-docker save jwilder/nginx-proxy -o nginx-proxy.tar
-docker save jrcs/letsencrypt-nginx-proxy-companion -o letsencrypt.tar
-```
-## 3.- Empaquetar en tar.gz
-
-```bash
-tar -czf docker_images_backup.tar.gz *.tar
+## 2.- Guardar las imagenes de Docker
+```sh
+docker save $(docker-compose -f docker-compose.yml config | grep 'image:' | awk '{print $2}') -o docker_images_backup.tar
 ```
 
-## 4.- Cargar imagenes en el nuevo servidor
+## 2.1- COMPRIMIR PARA ENVIAR
+```sh
+gzip docker_images_backup.tar
+```
+
+## 2.2.- Cargar imagenes en el nuevo servidor
 
 ```bash
-tar -xzf docker_images_backup.tar.gz
-
-docker load -i web_base_1.1.0.tar
-docker load -i wordpress_6.8.3_php8.3_apache.tar
-docker load -i phpmyadmin_5.2.3.tar
-docker load -i mariadb_10.11.tar
-docker load -i nginx-proxy.tar
-docker load -i letsencrypt.tar
+ docker load -i docker_images_backup.tar.gz
 ```
 
 # Ansible
-
+```sh
 sudo apt remove ansible
 
 sudo apt install python3-venv -y
 
-install pyenv
+python3 -m venv ansible-venv
+
+source ansible-venv/bin/activate
 
 python3 -m pip install ansible
 
 python3 -m pip install --upgrade ansible
 
 ansible-galaxy collection install community.docker
+```
 
 ***Ansible**
 

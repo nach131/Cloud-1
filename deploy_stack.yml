@@ -1,4 +1,3 @@
----
 - name: Desplegar stack Inception 42 Barelona
   hosts: all
   become: yes
@@ -6,53 +5,99 @@
     - vars.yml
   tasks:
 
-    # - name: Actualizar cache de paquetes
-    #   apt:
-    #     update_cache: yes
+    # 1 — Uninstall old versions
+    - name: Remove old Docker packages
+      apt:
+        name:
+          - docker.io
+          - docker-doc
+          - docker-compose
+          - docker-compose-v2
+          - podman-docker
+          - containerd
+          - runc
+        state: absent
+        purge: yes
 
-    # - name: Instalar paquetes básicos
-    #   apt:
-    #     name:
-    #       - apt-transport-https
-    #       - ca-certificates
-    #       - curl
-    #       - gnupg
-    #       - lsb-release
-    #       - git
-    #       - software-properties-common
-    #       - tar
-    #     state: present
+    # 2 — apt update
+    - name: Update apt cache
+      apt:
+        update_cache: yes
 
-    # - name: Añadir llave GPG de Docker
-    #   apt_key:
-    #     url: https://download.docker.com/linux/ubuntu/gpg
-    #     state: present
+    # 3 — Install dependencies
+    - name: Install ca-certificates and curl
+      apt:
+        name:
+          - ca-certificates
+          - curl
+        state: present
 
-    # - name: Añadir repositorio oficial de Docker
-    #   apt_repository:
-    #     repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
-    #     state: present
+    # 4 — Create keyrings directory
+    - name: Create /etc/apt/keyrings directory
+      file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: '0755'
 
-    # - name: Actualizar cache después de añadir Docker
-    #   apt:
-    #     update_cache: yes
+    # 5 — Download Docker GPG key
+    - name: Download Docker GPG key
+      get_url:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        dest: /etc/apt/keyrings/docker.asc
+        mode: '0644'
 
-    # - name: Instalar Docker Engine y docker-compose
-    #   apt:
-    #     name:
-    #       - docker-ce
-    #       - docker-ce-cli
-    #       - containerd.io
-    #       - docker-compose
-    #     state: present
+    # 6 — Add Docker repo using the new .sources format
+    - name: Add Docker apt repository in .sources format
+      copy:
+        dest: /etc/apt/sources.list.d/docker.sources
+        mode: '0644'
+        content: |
+          Types: deb
+          URIs: https://download.docker.com/linux/ubuntu
+          Suites: {{ ansible_facts['lsb']['codename'] }}
+          Components: stable
+          Signed-By: /etc/apt/keyrings/docker.asc
 
-    # - name: Asegurar que usuario nacho puede usar Docker sin sudo
-    #   user:
-    #     name: nacho
-    #     groups: docker
-    #     append: yes
+    # 7 — apt update again
+    - name: Update apt cache after adding Docker repo
+      apt:
+        update_cache: yes
 
-    - name: Clonar repositorio con docker-compose
+    # 8 — Install Docker packages
+    - name: Install Docker Engine packages
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: present
+
+    # 9 — Ensure Docker service is running
+    - name: Ensure Docker is running
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    # 10 — Check Docker status
+    - name: Check Docker service status
+      command: systemctl is-active docker
+      register: docker_status
+      changed_when: false
+
+    - name: Show Docker status
+      debug:
+        msg: "Docker status: {{ docker_status.stdout }}"
+
+    - name: Add user nacho to docker group
+      user:
+        name: "nacho"
+        groups: docker
+        append: yes
+
+    - name: Clonar repositorio Cloud-1
       git:
         repo: 'git@github.com:nach131/Cloud-1.git'
         dest: "{{ toma_path }}"
@@ -64,7 +109,7 @@
     - name: Generar fichero .env desde plantilla
       template:
         src: env.j2
-        dest: "/home/nacho/Cloud-1/srcs/.env"
+        dest: "/home/nacho/Cloud-1/.env"
         owner: nacho
         group: nacho
         mode: "0600"
@@ -102,14 +147,8 @@
       become_user: nacho
       shell: docker-compose up -d
       args:
-        chdir: "/home/nacho/Cloud-1/srcs"
+        chdir: "/home/nacho/Cloud-1"
 
 # ansible-playbook -i hosts-control deploy_stack.yml --ask-become-pass --ask-vault-pass
 
 # ansible-playbook -i hosts-control deploy_stack.yml -l cloud2 --ask-become-pass --ask-vault-pass
-
-
-
-# TODO
-
-# [cite_start]Sea posible desplegar tu sitio en varios servidores en paralelo. [cite: 39]

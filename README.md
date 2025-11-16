@@ -109,6 +109,49 @@ ansible-playbook -i hosts-control deploy_stack.yml -l cloud2,cloud3 --ask-become
 
 ---
 
+## Generar una deploy key
+
+```sh
+ssh-keygen -t ed25519 -C "deploy key para repo X" -f ~/.ssh/deploy_key_repoX
+```
+### 1.- Dar permisos 
+```sh
+chmod 600 ~/.ssh/deploy_key_cloud
+chmod 644 ~/.ssh/deploy_key_cloud.pub
+```
+### 1.2- Cargar las claves en ssh-agent
+```sh
+chmod 600 ~/.ssh/deploy_key_cloud
+chmod 644 ~/.ssh/deploy_key_cloud.pub
+```
+comprobar que las claves estan cargad
+```sh
+ssh-add -l
+
+256 SHA256:xxxxxxx deploy_key_cloud (ED25519)
+```
+
+### 1.3- Editar archivo configuracion SSH
+```sh
+vim ~/.ssh/config
+
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/deploy_key_cloud
+    IdentitiesOnly yes
+```
+
+### 1.4- Verificar la conexión
+```sh
+ssh -T git@github.com
+```
+
+### Añadir la key a Github para deploy
+
+Eso deverias de saberlo
+
+
 ## Services & Domains
 
 | Service | URL | HTTPS |
