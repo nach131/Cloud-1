@@ -1,0 +1,8 @@
+user_name: nacho
+home_dir: "/home/{{ user_name }}"
+cloud_repo: "Cloud-1"
+cloud_dir: "{{ home_dir }}/{{ cloud_repo }}"
+ssh_dir: "{{ home_dir }}/.ssh"
+data_tar: "{{ home_dir }}/data.tar.gz"
+keys_tar: "{{ home_dir }}/keys.tar.gz"
+docker_backup: "{{ home_dir }}/docker_images_backup.tar.gz"

@@ -3,67 +3,66 @@
   become: yes
   vars_files:
     - vars.yml
+    - paths.yml  
   tasks:
 
-        # 11 - Copiar keys
     - name: Copiar keys deploy al host
       copy:
-        src: /home/nacho/keys.tar.gz
-        # src: "{{ local_data_path }}/data.tar.gz"
-        dest: "/home/nacho/keys.tar.gz"
-        owner: nacho
-        group: nacho
+        src: "{{ keys_tar }}"
+        dest: "{{ keys_tar }}"
+        owner: "{{ user_name }}"
+        group: "{{ user_name }}"
         mode: "0644"
 
     - name: Descomprimir keys.tar.gz
       unarchive:
-        src: /home/nacho/keys.tar.gz
-        dest: /home/nacho
+        src: "{{ keys_tar }}"
+        dest: "{{ home_dir }}"
         remote_src: yes
-        owner: nacho
-        group: nacho
+        owner: "{{ user_name }}"
+        group: "{{ user_name }}"
 
     - name: Mover deploy key al .ssh
-      command: mv /home/nacho/keys/deploy_key_cloud /home/nacho/.ssh/deploy_key_cloud
+      command: mv "{{ home_dir }}/keys/deploy_key_cloud" "{{ ssh_dir }}/deploy_key_cloud"
       args:
-        removes: /home/nacho/keys/deploy_key_cloud
+        removes: "{{ home_dir }}/keys/deploy_key_cloud"
 
     - name: Cambiar propietario y permisos de la clave privada
       file:
-        path: /home/nacho/.ssh/deploy_key_cloud
-        owner: nacho
-        group: nacho
+        path: "{{ ssh_dir }}/deploy_key_cloud"
+        owner: "{{ user_name }}"
+        group: "{{ user_name }}"
         mode: '0600'
 
     - name: Add GitHub to known_hosts
       known_hosts:
-        path: /home/nacho/.ssh/known_hosts
+        path: "{{ ssh_dir }}/known_hosts"
         name: github.com
         key: "{{ lookup('pipe','ssh-keyscan github.com') }}"
         state: present
 
     - name: Set correct permissions on known_hosts
       file:
-        path: /home/nacho/.ssh/known_hosts
-        owner: nacho
-        group: nacho
+        path: "{{ ssh_dir }}/known_hosts"
+        owner: "{{ user_name }}"
+        group: "{{ user_name }}"
         mode: '0644'
 
     - name: Configure SSH to use deploy key for GitHub
       copy:
-        dest: /home/nacho/.ssh/config
-        owner: nacho
-        group: nacho
+        dest: "{{ ssh_dir }}/config"
+        owner: "{{ user_name }}"
+        group: "{{ user_name }}"
         mode: '0600'
         content: |
           Host github.com
               HostName github.com
               User git
-              IdentityFile /home/nacho/.ssh/deploy_key_cloud
+              IdentityFile "{{ ssh_dir }}/deploy_key_cloud"
               IdentitiesOnly yes
 
     - name: Test SSH connection to GitHub
-      become_user: nacho
+      become_user: "{{ user_name }}"
       command: ssh -T git@github.com
       register: github_test
       failed_when: "'successfully authenticated' not in github_test.stderr" # solo muestra si es err
@@ -72,59 +71,58 @@
       debug:
         var: github_test.stdout
 
-    # 12 - Clonar repo
     - name: Clonar repositorio Cloud-1
       git:
         repo: 'git@github.com:nach131/Cloud-1.git'
-        dest: /home/nacho/Cloud-1/
+        dest: "{{ cloud_dir }}/"
         version: main
         force: yes            # fuerza actualización si ya existe
         update: yes           # actualiza si ya está clonado
-      become_user: nacho
+      become_user: "{{ user_name }}"
 
     - name: Generar fichero .env desde plantilla
       template:
         src: env.j2
-        dest: "/home/nacho/Cloud-1/.env"
-        owner: nacho
-        group: nacho
+        dest: "{{ cloud_dir }}/.env"
+        owner: "{{ user_name }}"
+        group: "{{ user_name }}"
         mode: "0600"
 
-      # 11 - Copiar Datos 
     - name: Copiar data.tar.gz al host
       copy:
-        src: /home/nacho/data.tar.gz
-        # src: "{{ local_data_path }}/data.tar.gz"
-        dest: "/home/nacho/Cloud-1/data.tar.gz"
-        owner: nacho
-        group: nacho
+        src: "{{ data_tar }}"
+        dest: "{{ data_tar }}"
+        owner: "{{ user_name }}"
+        group: "{{ user_name }}"
         mode: "0644"
 
     - name: Descomprimir data.tar.gz
       unarchive:
-        src: /home/nacho/Cloud-1/data.tar.gz
-        dest: /home/nacho/Cloud-1
+        src: "{{ data_tar }}"
+        dest: "{{ cloud_dir }}"
         remote_src: yes
-        owner: nacho
-        group: nacho
+        owner: "{{ user_name }}"
+        group: "{{ user_name }}"
 
     - name: Copiar docker_images_backup.tar.gz al host
       copy:
-        src: /home/nacho/docker_images_backup.tar.gz
-        dest: /home/nacho/docker_images_backup.tar.gz
-        owner: nacho
-        group: nacho
+        src: "{{ docker_backup }}"
+        dest: "{{ docker_backup }}"
+        owner: "{{ user_name }}"
+        group: "{{ user_name }}"
         mode: "0644"
 
     - name: Cargar imágenes de Docker desde el backup
-      become_user: nacho
-      shell: docker load -i /home/nacho/docker_images_backup.tar.gz
+      become_user: "{{ user_name }}"
+      shell: "docker load -i {{ docker_backup }}"
 
     - name: Levantar servicios con docker-compose
-      become_user: nacho
+      become_user: "{{ user_name }}"
       shell: docker compose up -d
       args:
-        chdir: "/home/nacho/Cloud-1"
+        chdir: "{{ cloud_dir }}"
+
+#  ====================================================================================
 
 # ansible-playbook -i hosts-control deploy_stack.yml --ask-become-pass --ask-vault-pass
 
