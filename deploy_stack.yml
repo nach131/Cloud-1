@@ -52,37 +52,14 @@
     #     groups: docker
     #     append: yes
 
-    # - name: Clonar repositorio con docker-compose
-    #   git:
-    #     repo: 'git@github.com:nach131/Cloud-1.git'   # Cambia por tu repo
-    #     dest: "{{ toma_path }}"
-    #     version: main
-    #     force: yes            # fuerza actualización si ya existe
-    #     update: yes           # actualiza si ya está clonado
-    #   become_user: nacho
-
-    # - name: Crear subcarpetas necesarias para docker-compose
-    #   file:
-    #     path: "{{ toma_path }}/data/{{ item }}"
-    #     state: directory
-    #     owner: nacho
-    #     group: nacho
-    #     mode: "0755"
-    #   loop:
-    #     - logs/proxy
-    #     - logs/nasa
-    #     - mysql
-    #     - wordpress
-    #     - nasa
-    #     - certs
-
-    - name: Copiar docker-compose.yml al host
-      copy:
-        src: ./docker-compose.yml
-        dest: "{{ toma_path }}/docker-compose.yml"
-        owner: nacho
-        group: nacho
-        mode: "0644"
+    - name: Clonar repositorio con docker-compose
+      git:
+        repo: 'git@github.com:nach131/Cloud-1.git'
+        dest: "{{ toma_path }}"
+        version: main
+        force: yes            # fuerza actualización si ya existe
+        update: yes           # actualiza si ya está clonado
+      become_user: nacho
 
     - name: Generar fichero .env desde plantilla
       template:
@@ -95,6 +72,7 @@
     - name: Copiar data.tar.gz al host
       copy:
         src: /home/nacho/data.tar.gz
+        # src: "{{ local_data_path }}/data.tar.gz"
         dest: "/home/nacho/Cloud-1/data.tar.gz"
         owner: nacho
         group: nacho
@@ -129,3 +107,9 @@
 # ansible-playbook -i hosts-control deploy_stack.yml --ask-become-pass --ask-vault-pass
 
 # ansible-playbook -i hosts-control deploy_stack.yml -l cloud2 --ask-become-pass --ask-vault-pass
+
+
+
+# TODO
+
+# [cite_start]Sea posible desplegar tu sitio en varios servidores en paralelo. [cite: 39]
