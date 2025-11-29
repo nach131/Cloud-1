@@ -1,3 +1,47 @@
+## 1.- Configurar Server
+
+```sh
+useradd -m -s /bin/bash nacho
+passwd nacho   # (solo si quieres que tenga password local, no es obligatorio)
+```
+### 1.2. Crear directorios .ssh
+```sh
+mkdir -p /home/nacho/.ssh
+touch /home/nacho/.ssh/authorized_keys
+chmod 700 /home/nacho/.ssh
+chmod 600 /home/nacho/.ssh/authorized_keys
+chown -R nacho:nacho /home/nacho/.ssh
+```
+
+### 1.3 Añadir clave pública
+*** Pegarla directamente ***
+```sh
+cat >> /home/nacho/.ssh/authorized_keys << EOF
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI...tu-clave-completa... tu-comentario
+EOF
+```
+*** Copiarla desde host principal ***
+```sh
+ssh-copy-id -i ~/.ssh/id_ed25519.pub nacho@IP_DEL_SERVIDOR
+```
+
+### 1.4 Desactivar login por contraseña y por root en SSH
+```sh
+nano /etc/ssh/sshd_config
+
+PermitRootLogin no
+PasswordAuthentication no
+PubkeyAuthentication yes
+ChallengeResponseAuthentication no
+```
+
+### 1.5 Reiniciar el servidor SSH
+```sh
+systemctl restart sshd
+# o en algunos servidores:
+systemctl restart ssh
+```
+
 ```bash
 web_base                                 1.1.0                 79d26460b2f6   7 hours ago    152MB
 jwilder/nginx-proxy                      latest                4e68010bd2c2   13 hours ago   172MB
@@ -46,10 +90,11 @@ ansible-galaxy collection install community.docker
 ansible-doc -l
 
 ***/etc/host***
-Editar el fichero y coner los nombre e IP de los host
+Editar el fichero y con los nombre e IP de los host
 
 ***File hosts-control***
 Listado con las maquinas a controlar
+hosts-control
 
 ## Hacer ping a todos los nodos
 ```sh
