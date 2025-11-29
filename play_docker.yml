@@ -1,0 +1,57 @@
+---
+- hosts: all
+  become: yes
+  vars_files:
+    - paths.yml
+
+  tasks:
+    - name: "DOWN → Parar y eliminar completamente el stack"
+      community.docker.docker_compose_v2:
+        project_src: "{{ cloud_dir }}"
+        state: absent
+        remove_volumes: true
+        remove_orphans: true
+        remove_images: local
+      tags:
+        - down
+        - compose_down
+      register: compose_down_result
+
+    - name: "UP → Levantar el stack docker-compose"
+      community.docker.docker_compose_v2:
+        project_src: "{{ cloud_dir }}"
+        state: present
+        build: always          # reconstruye imágenes si cambió el Dockerfile
+        pull: always        # siempre baja las imágenes más nuevas
+        recreate: auto     # solo recrea contenedores que cambiaron
+      tags:
+        - up
+        - compose_up
+      register: compose_up_result
+
+    # Opcional: mostrar resultado solo de la tarea que se ejecute
+    - name: Mostrar resultado del DOWN
+      ansible.builtin.debug:
+        var: compose_down_result
+      when: compose_down_result is defined
+      tags: down
+
+    - name: Mostrar resultado del UP
+      ansible.builtin.debug:
+        var: compose_up_result
+      when: compose_up_result is defined
+      tags: up
+
+
+# Especicar Host
+# -l cloud
+
+  # Bajar todo
+# ansible-playbook -i hosts-control play_docker.yml -l cloud --ask-become-pass --ask-vault-pass --tags down
+
+# Subir todo
+# ansible-playbook -i hosts-control play_down.yml -l cloud --ask-become-pass --ask-vault-pass --tags up
+# ansible-playbook -i hosts-control play_docker.yml -l cloud --ask-become-pass --ask-vault-pass --tags up
+
+# ansible-playbook -i hosts-control play_docker.yml -l cloud --ask-become-pass --ask-vault-pass --tags compose_down
+# ansible-playbook -i hosts-control play_docker.yml -l cloud --ask-become-pass --ask-vault-pass --tags compose_up
