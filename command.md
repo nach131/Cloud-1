@@ -3,6 +3,8 @@
 ```sh
 useradd -m -s /bin/bash nacho
 passwd nacho   # (solo si quieres que tenga password local, no es obligatorio)
+sudo usermod -aG sudo nacho
+
 ```
 ### 1.2. Crear directorios .ssh
 ```sh
