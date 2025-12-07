@@ -5,9 +5,9 @@
       - name: "MAIN DOMAIN"
         url: "{{ inventory_hostname }}.{{ domain_base }}"
       - name: "NASA"
-        url: "{{ nasa_subdomain }}"
+        url: "{{ nasa_subdomain }}.{{ inventory_hostname }}.{{ domain_base }}"
       - name: "PHPMYADMIN"
-        url: "{{ phpmyadmin_subdomain }}"
+        url: "{{ phpmyadmin_subdomain }}.{{ inventory_hostname }}.{{ domain_base }}"
 
 - name: "Comprobar disponibilidad de los dominios"
   uri:

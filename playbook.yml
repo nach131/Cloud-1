@@ -36,13 +36,16 @@
     - data_restore
     - docker_images
     - start_app
-    - check_domains
+    # - check_domains
 
 # ### EJECUCION ######
 
 # ansible-playbook -i hosts-control playbook.yml --ask-become-pass --ask-vault-pass
 
-# ansible-playbook -i hosts-control playbook.yml -l cloud2 --ask-become-pass --ask-vault-pass
+# ansible-playbook -i hosts-control playbook.yml -l ft --ask-become-pass --ask-vault-pass
 
 ### EJECUCION DE ROLES INDIVIDUALES ######
-# ansible-playbook playbook.yml --tags "check_domains"
+# ansible-playbook -i hosts-control playbook.yml --tags "check_domains" --ask-become-pass --ask-vault-pass
+
+
+# ansible-playbook playbook.yml --start-at-task "Comprobar disponibilidad de los dominios"
