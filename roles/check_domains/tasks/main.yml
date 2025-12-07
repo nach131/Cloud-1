@@ -1,0 +1,46 @@
+---
+- name: "Crear lista de dominios a comprobar"
+  set_fact:
+    domain_list:
+      - name: "MAIN DOMAIN"
+        url: "{{ inventory_hostname }}.{{ domain_base }}"
+      - name: "NASA"
+        url: "{{ nasa_subdomain }}"
+      - name: "PHPMYADMIN"
+        url: "{{ phpmyadmin_subdomain }}"
+
+- name: "Comprobar disponibilidad de los dominios"
+  uri:
+    url: "https://{{ item.url }}"
+    method: GET
+    return_content: no
+    status_code: 200-399
+  register: domain_check_results
+  loop: "{{ domain_list }}"
+  ignore_errors: yes
+
+- name: "Mostrar resultados"
+  debug:
+    msg: >
+      {{ item.item.name }} ({{ item.item.url }}): 
+      {{ 'ONLINE ✔️' if item.status|default(0) in range(200,400) else 'OFFLINE ❌' }}
+  loop: "{{ domain_check_results.results }}"
+
+- name: "Fallar si algún dominio no responde"
+  fail:
+    msg: "Los siguientes dominios no están accesibles: {{ failed_domains }}"
+  when: failed_domains | length > 0
+  vars:
+    failed_domains: >-
+      {{
+        domain_check_results.results
+        | selectattr('status', 'undefined')
+        | map(attribute='item.url')
+        | list
+        +
+        domain_check_results.results
+        | selectattr('status', 'defined')
+        | rejectattr('status', 'in', range(200,400))
+        | map(attribute='item.url')
+        | list
+      }}

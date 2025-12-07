@@ -2,7 +2,7 @@
 
 ```sh
 useradd -m -s /bin/bash nacho
-passwd nacho   # (solo si quieres que tenga password local, no es obligatorio)
+passwd nacho   # (solo si se quiere tener password local)
 sudo usermod -aG sudo nacho
 
 ```
